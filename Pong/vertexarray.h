@@ -1,14 +1,20 @@
-//
-//  vertexarray.hpp
-//  Pong
-//
-//  Created by shindelu on 4/5/20.
-//  Copyright © 2020 shindelu. All rights reserved.
-//
+  
+#pragma once
 
-#ifndef vertexarray_hpp
-#define vertexarray_hpp
+#include "vertexBuffer.h"
 
-#include <stdio.h>
+class VertexBufferLayout;
 
-#endif /* vertexarray_hpp */
+class VertexArray
+{
+private:
+    unsigned int m_RendererID;
+public:
+    VertexArray();
+    ~VertexArray();
+
+    void AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout);
+
+    void Bind() const;
+    void Unbind() const;
+};

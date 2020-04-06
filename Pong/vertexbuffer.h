@@ -1,14 +1,14 @@
-//
-//  vertexbuffer.hpp
-//  Pong
-//
-//  Created by shindelu on 4/5/20.
-//  Copyright © 2020 shindelu. All rights reserved.
-//
 
-#ifndef vertexbuffer_hpp
-#define vertexbuffer_hpp
+#pragma once
 
-#include <stdio.h>
+class VertexBuffer
+{
+private:
+    unsigned int m_RendererID;
+public:
+    VertexBuffer(const void* data, unsigned int size);
+    ~VertexBuffer();
 
-#endif /* vertexbuffer_hpp */
+    void Bind() const;
+    void Unbind() const;
+};

@@ -1,9 +1,25 @@
-//
-//  vertexbuffer.cpp
-//  Pong
-//
-//  Created by shindelu on 4/5/20.
-//  Copyright © 2020 shindelu. All rights reserved.
-//
+  
+#include "vertexbuffer.h"
+#include "renderer.h"
 
-#include "vertexbuffer.hpp"
+VertexBuffer::VertexBuffer(const void * data, unsigned int size)
+{
+    glGenBuffers(1, &m_RendererID); // Generate a single buffer
+    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID); // Select the buffer to be drawn
+    glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW); // Add the data to the buffer
+}
+
+VertexBuffer::~VertexBuffer()
+{
+    glDeleteBuffers(1, &m_RendererID);
+}
+
+void VertexBuffer::Bind() const
+{
+    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+}
+
+void VertexBuffer::Unbind() const
+{
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
