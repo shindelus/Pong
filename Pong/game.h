@@ -14,6 +14,8 @@ public:
     Game(float& wH, float& wW);
     ~Game(){};
     
+    void CheckForXCollision(Paddle& p, Ball& b);
+    void CheckForYCollision(Paddle& p, Ball& b);
     void CheckForBallXBounds(Ball& b);
     void CheckForBallYBounds(Ball& b);
     void CheckForPaddleYBounds(Paddle& p);

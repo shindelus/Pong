@@ -4,6 +4,8 @@ class Paddle
 {
 public:
     bool isComputer;
+    bool isMovingUp;
+    bool isMovingDown;
     float Xposition;
     float Yposition;
     float Yspeed;

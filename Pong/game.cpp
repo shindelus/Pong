@@ -1,6 +1,15 @@
 
 #include "game.h"
 
+void Game::CheckForXCollision(Paddle& p, Ball& b)
+{
+    
+};
+
+void Game::CheckForYCollision(Paddle& p, Ball& b)
+{
+    
+};
 
 void Game::CheckForBallXBounds(Ball& b)
 {
@@ -9,7 +18,7 @@ void Game::CheckForBallXBounds(Ball& b)
 
 void Game::CheckForBallYBounds(Ball& b)
 {
-    
+
 };
 
 void Game::CheckForPaddleYBounds(Paddle& p)

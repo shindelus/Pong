@@ -38,18 +38,23 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     printf("ACTION IS %d\n", action);
     if (key == GLFW_KEY_DOWN)
     {
-        if (action == GLFW_PRESS || action == GLFW_REPEAT)
+        if (action == GLFW_PRESS)// || action == GLFW_REPEAT)
         {
-            game.MovePaddleDown(paddle2);
+            paddle2.isMovingDown = true;
+        } else if (action == GLFW_RELEASE)
+        {
+            paddle2.isMovingDown = false;
         }
     } else if (key == GLFW_KEY_UP)
     {
-        if (action == GLFW_PRESS || action == GLFW_REPEAT)
+        if (action == GLFW_PRESS)// || action == GLFW_REPEAT)
         {
-            game.MovePaddleUp(paddle2);
+            paddle2.isMovingUp = true;
+        } else if (action == GLFW_RELEASE)
+        {
+            paddle2.isMovingUp = false;
         }
     }
-
 }
 
 static std::array<Vertex, 4> CreateQuad(float x, float y, float w, float h)
@@ -188,8 +193,17 @@ int main(void)
         
         renderer.Draw(va, ib, shader);
         
+        
+        if (paddle2.isMovingUp)
+        {
+            game.MovePaddleUp(paddle2);
+        } else if (paddle2.isMovingDown)
+        {
+            game.MovePaddleDown(paddle2);
+        }
         game.OnUpdate(paddle1, paddle2, ball);
 
+        
         // Animate the r value between 0.0 and 1.0
         if (r > 1.0f)
             increment = -0.05f;
