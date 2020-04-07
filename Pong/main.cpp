@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <array>
 
 #include "renderer.h"
 #include "vertexbuffer.h"
@@ -14,13 +15,68 @@
 #include "vertexarray.h"
 #include "shader.h"
 
+#include "ball.h"
+#include "paddle.h"
+#include "game.h"
+#include "helpers.h"
+
 #include "glm/glm/glm.hpp"
 #include "glm/glm/gtc/matrix_transform.hpp"
+
+
+
+float windowHeight = 800.0f;
+float windowWidth = 1300.0f;
+
+Game game(windowHeight, windowWidth);
+Paddle paddle1(50.0f, (windowHeight/2.0f) - 70.0f, true);
+Paddle paddle2(windowWidth - 70.0f, (windowHeight/2.0f) - 70.0f, false);
+Ball ball;
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    printf("ACTION IS %d\n", action);
+    if (key == GLFW_KEY_DOWN)
+    {
+        if (action == GLFW_PRESS || action == GLFW_REPEAT)
+        {
+            game.MovePaddleDown(paddle2);
+        }
+    } else if (key == GLFW_KEY_UP)
+    {
+        if (action == GLFW_PRESS || action == GLFW_REPEAT)
+        {
+            game.MovePaddleUp(paddle2);
+        }
+    }
+
+}
+
+static std::array<Vertex, 4> CreateQuad(float x, float y, float w, float h)
+{
+    Vertex v0;
+    v0.position = { x, y };
+//    v0.color = { 0.18f, 0.6f, 0.96f, 1.0f };
+    
+    Vertex v1;
+    v1.position = { x + w, y };
+//    v1.color = { 0.18f, 0.6f, 0.96f, 1.0f };
+    
+    Vertex v2;
+    v2.position = { x + w, y + h };
+//    v2.color = { 0.18f, 0.6f, 0.96f, 1.0f };
+    
+    Vertex v3;
+    v3.position = { x, y + h };
+//    v3.color = { 0.18f, 0.6f, 0.96f, 1.0f };
+    
+    return { v0, v1, v2, v3 };
+}
 
 int main(void)
 {
     GLFWwindow* window;
-
+    
     // Initialize the library
     if (!glfwInit())
         return -1;
@@ -32,7 +88,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(960, 540, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(windowWidth, windowHeight, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -56,39 +112,43 @@ int main(void)
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
-    // Create and select (bind) the data & buffer for drawing
-    float positions[] =
-    {
-        -0.5f, -0.5f,
-         0.5f, -0.5f,
-         0.5f,  0.5f,
-        -0.5f,  0.5f
-    };
-
     // The indexes of the vertices we want to draw
-    unsigned int indices[] =
+    unsigned int indices[1500];
+    int x = 0;
+    int y = 0;
+    while (x < 1500)
     {
-        0, 1, 2,
-        2, 3, 0
-    };
+        indices[x] = y;
+        indices[x + 1] = y + 1;
+        indices[x + 2] = y + 2;
+        indices[x + 3] = y + 2;
+        indices[x + 4] = y + 3;
+        indices[x + 5] = y;
+        x = x + 6;
+        y = y + 4;
+    }
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     VertexArray va; // Initialize our vertex array
-
     VertexBuffer vb(nullptr, 1000 * sizeof(float)); // Create and bind a buffer for the vertices
-
     VertexBufferLayout layout; // Create a layout for the buffer we created
     layout.Push<float>(2);
 
     va.AddBuffer(vb, layout);
     
-    IndexBuffer ib(indices, 6); // Create and bind a buffer for the indices
+    IndexBuffer ib(indices, 1500); // Create and bind a buffer for the indices
+    
+    glm::mat4 proj = glm::ortho(0.0f, windowWidth, 0.0f, windowHeight, -1.0f, 1.0f);
+//    glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
+//    glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
+//    glm::mat4 mvp = proj * view * model;
            
     Shader shader("Pong/basic.shader");
     shader.Bind();
     shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+    shader.SetUniformMat4f("u_MVP", proj);
     
     va.Unbind();
     vb.Unbind();
@@ -96,6 +156,9 @@ int main(void)
     shader.Unbind();
 
     Renderer renderer;
+    
+    
+    glfwSetKeyCallback(window, key_callback);
 
     // Animation stuff
     float r = 0.0f;
@@ -109,10 +172,23 @@ int main(void)
         shader.Bind();
         shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
         
+        auto q0 = CreateQuad(ball.Xposition, ball.Yposition, ball.width, ball.height);
+        auto q1 = CreateQuad(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
+        auto q2 = CreateQuad(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
+
+        
+        Vertex vertices[12];
+        memcpy(vertices, q0.data(), q0.size() * sizeof(Vertex));
+        memcpy(vertices + q0.size(), q1.data(), q1.size() * sizeof(Vertex));
+        memcpy(vertices + q0.size() + q1.size(), q2.data(), q2.size() * sizeof(Vertex));
+
+        
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
-        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(positions), positions); // Add the data to the buffer
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Add the data to the buffer
         
         renderer.Draw(va, ib, shader);
+        
+        game.OnUpdate(paddle1, paddle2, ball);
 
         // Animate the r value between 0.0 and 1.0
         if (r > 1.0f)
