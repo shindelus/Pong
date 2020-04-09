@@ -7,6 +7,7 @@ class Game
 public:
     int player1Score;
     int player2Score;
+    int level;
     float windowHeight;
     float windowWidth;
     float countDownToStart;
@@ -14,16 +15,21 @@ public:
     Game(float& wH, float& wW);
     ~Game(){};
     
-    void CheckForXCollision(Paddle& p, Ball& b);
-    void CheckForYCollision(Paddle& p, Ball& b);
-    void CheckForBallXBounds(Ball& b);
+    void CheckForCollisions(Paddle& p1, Paddle& p2, Ball& b);
+    void CheckForLeftCollision(Paddle& p, Ball& b);
+    void CheckForRightCollision(Paddle& p, Ball& b);
+    void CheckForTopCollision(Paddle& p, Ball& b);
+    void CheckForBottomCollision(Paddle& p, Ball& b);
+    bool BallIsOutLeft(Ball& b);
+    bool BallIsOutRight(Ball& b);
     void CheckForBallYBounds(Ball& b);
-    void CheckForPaddleYBounds(Paddle& p);
+    bool isPaddleAtTop(Paddle& p);
+    bool isPaddleAtBottom(Paddle& p);
     void ResetLevel(Paddle& p1, Paddle& p2, Ball& b);
     void ResetGame(Paddle& p1, Paddle& p2, Ball& b);
     void OnUpdate(Paddle& p1, Paddle& p2, Ball& b);
     void MovePaddleUp(Paddle& p);
     void MovePaddleDown(Paddle& p);
-    void MoveComputerPaddle(Paddle& p);
-    void MoveBall(Ball& b);
+    void MoveComputerPaddle(Paddle& p, Ball& b);
+    void MoveBall(Paddle& p1, Paddle& p2, Ball& b);
 };

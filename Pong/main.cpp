@@ -35,7 +35,6 @@ Ball ball;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    printf("ACTION IS %d\n", action);
     if (key == GLFW_KEY_DOWN)
     {
         if (action == GLFW_PRESS)// || action == GLFW_REPEAT)
@@ -180,12 +179,15 @@ int main(void)
         auto q0 = CreateQuad(ball.Xposition, ball.Yposition, ball.width, ball.height);
         auto q1 = CreateQuad(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
         auto q2 = CreateQuad(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
-
         
-        Vertex vertices[12];
+        auto q3 = CreateQuad(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
+        
+        
+        Vertex vertices[16];
         memcpy(vertices, q0.data(), q0.size() * sizeof(Vertex));
         memcpy(vertices + q0.size(), q1.data(), q1.size() * sizeof(Vertex));
         memcpy(vertices + q0.size() + q1.size(), q2.data(), q2.size() * sizeof(Vertex));
+        memcpy(vertices + q0.size() + q1.size() + q2.size(), q3.data(), q3.size() * sizeof(Vertex));
 
         
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
@@ -203,6 +205,7 @@ int main(void)
         }
         game.OnUpdate(paddle1, paddle2, ball);
 
+        
         
         // Animate the r value between 0.0 and 1.0
         if (r > 1.0f)
