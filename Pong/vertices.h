@@ -10,6 +10,7 @@ struct Vec2
 {
     float x, y;
 };
+#pragma once
 
 struct Vec3
 {

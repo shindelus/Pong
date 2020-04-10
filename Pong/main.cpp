@@ -20,6 +20,7 @@
 #include "game.h"
 #include "helpers.h"
 #include "vertices.h"
+#include "letters.h"
 
 #include "glm/glm/glm.hpp"
 #include "glm/glm/gtc/matrix_transform.hpp"
@@ -56,27 +57,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         }
     }
 }
-
-//static std::array<Vertex, 4> CreateQuad(float x, float y, float w, float h)
-//{
-//    Vertex v0;
-//    v0.position = { x, y };
-////    v0.color = { 0.18f, 0.6f, 0.96f, 1.0f };
-//
-//    Vertex v1;
-//    v1.position = { x + w, y };
-////    v1.color = { 0.18f, 0.6f, 0.96f, 1.0f };
-//
-//    Vertex v2;
-//    v2.position = { x + w, y + h };
-////    v2.color = { 0.18f, 0.6f, 0.96f, 1.0f };
-//
-//    Vertex v3;
-//    v3.position = { x, y + h };
-////    v3.color = { 0.18f, 0.6f, 0.96f, 1.0f };
-//
-//    return { v0, v1, v2, v3 };
-//}
 
 int main(void)
 {
@@ -176,14 +156,20 @@ int main(void)
 
         shader.Bind();
         shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
-
         
         Vertices v;
+        
+        Letters let1(Letters::five, 200.0f, 200.0f, 100.0f, 60.0f, v);
+        Letters let2(Letters::six, 300.0f, 200.0f, 100.0f, 60.0f, v);
+        Letters let3(Letters::seven, 400.0f, 200.0f, 100.0f, 60.0f, v);
+        Letters let4(Letters::eight, 500.0f, 200.0f, 100.0f, 60.0f, v);
+        Letters let5(Letters::zero, 600.0f, 200.0f, 100.0f, 60.0f, v);
 
         v.AddVertData(ball.Xposition, ball.Yposition, ball.width, ball.height);
         v.AddVertData(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
         v.AddVertData(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
         v.AddVertData(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
+
 
         Vertex vertices[v.m_vertData.size()];
         std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
