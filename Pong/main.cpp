@@ -19,6 +19,7 @@
 #include "paddle.h"
 #include "game.h"
 #include "helpers.h"
+#include "vertices.h"
 
 #include "glm/glm/glm.hpp"
 #include "glm/glm/gtc/matrix_transform.hpp"
@@ -56,26 +57,26 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 }
 
-static std::array<Vertex, 4> CreateQuad(float x, float y, float w, float h)
-{
-    Vertex v0;
-    v0.position = { x, y };
-//    v0.color = { 0.18f, 0.6f, 0.96f, 1.0f };
-    
-    Vertex v1;
-    v1.position = { x + w, y };
-//    v1.color = { 0.18f, 0.6f, 0.96f, 1.0f };
-    
-    Vertex v2;
-    v2.position = { x + w, y + h };
-//    v2.color = { 0.18f, 0.6f, 0.96f, 1.0f };
-    
-    Vertex v3;
-    v3.position = { x, y + h };
-//    v3.color = { 0.18f, 0.6f, 0.96f, 1.0f };
-    
-    return { v0, v1, v2, v3 };
-}
+//static std::array<Vertex, 4> CreateQuad(float x, float y, float w, float h)
+//{
+//    Vertex v0;
+//    v0.position = { x, y };
+////    v0.color = { 0.18f, 0.6f, 0.96f, 1.0f };
+//
+//    Vertex v1;
+//    v1.position = { x + w, y };
+////    v1.color = { 0.18f, 0.6f, 0.96f, 1.0f };
+//
+//    Vertex v2;
+//    v2.position = { x + w, y + h };
+////    v2.color = { 0.18f, 0.6f, 0.96f, 1.0f };
+//
+//    Vertex v3;
+//    v3.position = { x, y + h };
+////    v3.color = { 0.18f, 0.6f, 0.96f, 1.0f };
+//
+//    return { v0, v1, v2, v3 };
+//}
 
 int main(void)
 {
@@ -175,21 +176,18 @@ int main(void)
 
         shader.Bind();
         shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
-        
-        auto q0 = CreateQuad(ball.Xposition, ball.Yposition, ball.width, ball.height);
-        auto q1 = CreateQuad(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
-        auto q2 = CreateQuad(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
-        
-        auto q3 = CreateQuad(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
-        
-        
-        Vertex vertices[16];
-        memcpy(vertices, q0.data(), q0.size() * sizeof(Vertex));
-        memcpy(vertices + q0.size(), q1.data(), q1.size() * sizeof(Vertex));
-        memcpy(vertices + q0.size() + q1.size(), q2.data(), q2.size() * sizeof(Vertex));
-        memcpy(vertices + q0.size() + q1.size() + q2.size(), q3.data(), q3.size() * sizeof(Vertex));
 
         
+        Vertices v;
+
+        v.AddVertData(ball.Xposition, ball.Yposition, ball.width, ball.height);
+        v.AddVertData(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
+        v.AddVertData(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
+        v.AddVertData(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
+
+        Vertex vertices[v.m_vertData.size()];
+        std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
+
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Add the data to the buffer
         
@@ -203,6 +201,8 @@ int main(void)
         {
             game.MovePaddleDown(paddle2);
         }
+        
+        
         game.OnUpdate(paddle1, paddle2, ball);
 
         
