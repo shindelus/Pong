@@ -6,10 +6,10 @@ Paddle::Paddle(float xpos, float ypos, bool isC)
 {
     Xposition = xpos;
     Yposition = ypos;
-    Yspeed = 20.0f;
     height = 140;
     width = 20;
     isComputer = isC;
+    Yspeed = 20.0f;
     isMovingUp = false;
     isMovingDown = false;
 }
