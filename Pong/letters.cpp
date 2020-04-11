@@ -144,7 +144,7 @@ void Letters::CreateR(Vertices& v)
 {
     CreateVertLeftFull(v);
     CreateVertRightTopHalfShort(v);
-    CreateVertRightBottomHalfFull(v);
+    v.AddVertData(leftSide + width - fontWidth, bottomSide, fontWidth, (height - fontWidth)/2);
     CreateHorizTopShort(v);
     CreateHorizMiddleShort(v);
 }
@@ -296,6 +296,11 @@ void Letters::Create0(Vertices& v)
     CreateVertRightShort(v);
     CreateHorizTopShort(v);
     CreateHorizBottomShort(v);
+}
+
+void Letters::CreateSPC(Vertices& v)
+{
+
 }
 
 void Letters::CreateVertMidFull(Vertices& v)
@@ -603,86 +608,89 @@ void Letters::CreateDiagTopRightToBottomLeft(Vertices& v)
 }
 
 
-Letters::Letters(letter lt, float left, float bottom, float ht, float wd, Vertices& vt)
+Letters::Letters(const char lt, float left, float bottom, float ht, float wd, Vertices& vt)
 {
+    letter = lt;
     height = ht;
     width = wd;
     leftSide = left;
     bottomSide = bottom;
     fontWidth = ht / 10.0f;
-    switch (lt)
+    switch (letter)
     {
-        case a : CreateA(vt);
+        case 'a' : CreateA(vt);
             break;
-        case b : CreateB(vt);
+        case 'b' : CreateB(vt);
             break;
-        case c : CreateC(vt);
+        case 'c' : CreateC(vt);
             break;
-        case d : CreateD(vt);
+        case 'd' : CreateD(vt);
             break;
-        case e : CreateE(vt);
+        case 'e' : CreateE(vt);
             break;
-        case f : CreateF(vt);
+        case 'f' : CreateF(vt);
             break;
-        case g : CreateG(vt);
+        case 'g' : CreateG(vt);
             break;
-        case h : CreateH(vt);
+        case 'h' : CreateH(vt);
             break;
-        case i : CreateI(vt);
+        case 'i' : CreateI(vt);
             break;
-        case j : CreateJ(vt);
+        case 'j' : CreateJ(vt);
             break;
-        case k : CreateK(vt);
+        case 'k' : CreateK(vt);
             break;
-        case l : CreateL(vt);
+        case 'l' : CreateL(vt);
             break;
-        case m : CreateM(vt);
+        case 'm': CreateM(vt);
             break;
-        case n : CreateN(vt);
+        case 'n' : CreateN(vt);
             break;
-        case o : CreateO(vt);
+        case 'o' : CreateO(vt);
             break;
-        case p : CreateP(vt);
+        case 'p' : CreateP(vt);
             break;
-        case q : CreateQ(vt);
+        case 'q' : CreateQ(vt);
             break;
-        case r : CreateR(vt);
+        case 'r' : CreateR(vt);
             break;
-        case s : CreateS(vt);
+        case 's' : CreateS(vt);
             break;
-        case t : CreateT(vt);
+        case 't' : CreateT(vt);
             break;
-        case u : CreateU(vt);
+        case 'u' : CreateU(vt);
             break;
-        case v : CreateV(vt);
+        case 'v' : CreateV(vt);
             break;
-        case w : CreateW(vt);
+        case 'w' : CreateW(vt);
             break;
-        case x : CreateX(vt);
+        case 'x' : CreateX(vt);
             break;
-        case y : CreateY(vt);
+        case 'y' : CreateY(vt);
             break;
-        case z : CreateZ(vt);
+        case 'z' : CreateZ(vt);
             break;
-        case one : Create1(vt);
+        case '1' : Create1(vt);
             break;
-        case two : Create2(vt);
+        case '2' : Create2(vt);
             break;
-        case three : Create3(vt);
+        case '3' : Create3(vt);
             break;
-        case four : Create4(vt);
+        case '4' : Create4(vt);
             break;
-        case five : Create5(vt);
+        case '5' : Create5(vt);
             break;
-        case six : Create6(vt);
+        case '6' : Create6(vt);
             break;
-        case seven : Create7(vt);
+        case '7' : Create7(vt);
             break;
-        case eight : Create8(vt);
+        case '8' : Create8(vt);
             break;
-        case nine : Create9(vt);
+        case '9' : Create9(vt);
             break;
-        case zero : Create0(vt);
+        case '0' : Create0(vt);
+            break;
+        case ' ' : CreateSPC(vt);
             break;
     };
 }

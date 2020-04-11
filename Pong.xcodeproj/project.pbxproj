@@ -19,6 +19,7 @@
 		0E81F59F243AF16400069A56 /* basic.shader in Sources */ = {isa = PBXBuildFile; fileRef = 0E81F59E243AF16400069A56 /* basic.shader */; };
 		0E840FEE24404602001DF5DE /* vertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E840FEC24404602001DF5DE /* vertices.cpp */; };
 		0E840FF12440DB74001DF5DE /* letters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E840FEF2440DB74001DF5DE /* letters.cpp */; };
+		0E840FF424413BDC001DF5DE /* word.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E840FF224413BDC001DF5DE /* word.cpp */; };
 		0EBC39B3243BE2560074F6E2 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC39B1243BE2560074F6E2 /* game.cpp */; };
 		0EBC39B6243BE27E0074F6E2 /* paddle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC39B4243BE27E0074F6E2 /* paddle.cpp */; };
 		0EBC39B9243BE2990074F6E2 /* ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC39B7243BE2990074F6E2 /* ball.cpp */; };
@@ -60,6 +61,8 @@
 		0E840FED24404602001DF5DE /* vertices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vertices.h; sourceTree = "<group>"; };
 		0E840FEF2440DB74001DF5DE /* letters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = letters.cpp; sourceTree = "<group>"; };
 		0E840FF02440DB74001DF5DE /* letters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = letters.h; sourceTree = "<group>"; };
+		0E840FF224413BDC001DF5DE /* word.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = word.cpp; sourceTree = "<group>"; };
+		0E840FF324413BDC001DF5DE /* word.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = word.h; sourceTree = "<group>"; };
 		0EBC39B1243BE2560074F6E2 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		0EBC39B2243BE2560074F6E2 /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
 		0EBC39B4243BE27E0074F6E2 /* paddle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cpp; sourceTree = "<group>"; };
@@ -130,6 +133,8 @@
 				0E840FED24404602001DF5DE /* vertices.h */,
 				0E840FEF2440DB74001DF5DE /* letters.cpp */,
 				0E840FF02440DB74001DF5DE /* letters.h */,
+				0E840FF224413BDC001DF5DE /* word.cpp */,
+				0E840FF324413BDC001DF5DE /* word.h */,
 			);
 			path = Pong;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				0E81F581243AC2E100069A56 /* main.cpp in Sources */,
 				0EBC39B9243BE2990074F6E2 /* ball.cpp in Sources */,
 				0E81F59F243AF16400069A56 /* basic.shader in Sources */,
+				0E840FF424413BDC001DF5DE /* word.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

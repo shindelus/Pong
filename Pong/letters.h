@@ -11,9 +11,10 @@ public:
     float fontWidth;
     float width;
     float height;
-    enum letter {
-        a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, one, two, three, four, five, six, seven, eight, nine, zero
-    };
+    char letter;
+//    enum letter {
+//        a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, one, two, three, four, five, six, seven, eight, nine, zero
+//    };
     
     void CreateA(Vertices& v);
     void CreateB(Vertices& v);
@@ -51,6 +52,7 @@ public:
     void Create8(Vertices& v);
     void Create9(Vertices& v);
     void Create0(Vertices& v);
+    void CreateSPC(Vertices& v);
     void CreateVertLeftFull(Vertices& v);
     void CreateVertMidFull(Vertices& v);
     void CreateVertLeftTopHalfShort(Vertices& v);
@@ -87,7 +89,7 @@ public:
     void CreateDiagTopLeftToBottomRight(Vertices& v);
     void CreateDiagTopRightToBottomLeft(Vertices& v);
 
-    Letters(letter l, float left, float bottom, float h, float w, Vertices& v);
+    Letters(const char lt, float left, float bottom, float h, float w, Vertices& v);
     ~Letters(){};
 private:
     

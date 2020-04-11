@@ -300,7 +300,7 @@ void Game::MoveBall(Paddle& p1, Paddle& p2, Ball& b)
     if (BallIsOutLeft(b))
     {
         player2Score++;
-        if (player2Score == 7)
+        if (player2Score == 1)
         {
             level++;
             b.speed = b.speed + 3.0f;

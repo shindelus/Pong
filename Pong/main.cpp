@@ -21,6 +21,7 @@
 #include "helpers.h"
 #include "vertices.h"
 #include "letters.h"
+#include "word.h"
 
 #include "glm/glm/glm.hpp"
 #include "glm/glm/gtc/matrix_transform.hpp"
@@ -158,24 +159,51 @@ int main(void)
         shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
         
         Vertices v;
-        
-        Letters let1(Letters::five, 200.0f, 200.0f, 100.0f, 60.0f, v);
-        Letters let2(Letters::six, 300.0f, 200.0f, 100.0f, 60.0f, v);
-        Letters let3(Letters::seven, 400.0f, 200.0f, 100.0f, 60.0f, v);
-        Letters let4(Letters::eight, 500.0f, 200.0f, 100.0f, 60.0f, v);
-        Letters let5(Letters::zero, 600.0f, 200.0f, 100.0f, 60.0f, v);
 
         v.AddVertData(ball.Xposition, ball.Yposition, ball.width, ball.height);
         v.AddVertData(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
         v.AddVertData(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
         v.AddVertData(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
+        
+        if (game.countDownToStart > 150.0f && game.countDownToStart <= 200.0f)
+        {
+            Word w("start", 570.0f, 400.0f, 50.0f, v);
+
+        } else if (game.countDownToStart > 100.0f && game.countDownToStart <= 150.0f)
+        {
+            Word w("  3  ", 570.0f, 400.0f, 50.0f, v);
+
+        } else if (game.countDownToStart > 50.0f && game.countDownToStart <= 100.0f)
+        {
+            Word w("  2  ", 570.0f, 400.0f, 50.0f, v);
+
+        } else if (game.countDownToStart > 0.0f && game.countDownToStart <= 50.0f)
+        {
+            Word w("  1  ", 570.0f, 400.0f, 50.0f, v);
+        }
+        
+        std::stringstream p1ScoreStr;
+        p1ScoreStr << game.player1Score;
+        Word scoreP1(p1ScoreStr.str(), 30.0f, game.windowHeight - 45.0f, 35.0f, v);
+        
+        std::stringstream p2ScoreStr;
+        p2ScoreStr << game.player2Score;
+        Word scoreP2(p2ScoreStr.str(), game.windowWidth - 50.0f, game.windowHeight - 45.0f, 35.0f, v);
+        
+        std::stringstream levelStr;
+        levelStr << game.level;
+        Word level("level " + levelStr.str(), (game.windowWidth/2) - 75.0f, game.windowHeight - 45.0f, 35.0f, v);
 
 
         Vertex vertices[v.m_vertData.size()];
         std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
+        
+        printf("size of vertices is %lu\n", sizeof(vertices[0]));
 
+        int filler[1000];
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Add the data to the buffer
+        glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(filler), filler);
         
         renderer.Draw(va, ib, shader);
         
@@ -190,7 +218,6 @@ int main(void)
         
         
         game.OnUpdate(paddle1, paddle2, ball);
-
         
         
         // Animate the r value between 0.0 and 1.0
@@ -202,6 +229,10 @@ int main(void)
 
         glfwSwapBuffers(window); // Swap front and back buffers
         glfwPollEvents(); // Poll for and process events
+        
+        glBufferData(GL_ARRAY_BUFFER, 1000 * sizeof(Vertex), NULL, GL_STREAM_DRAW);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
     glfwTerminate();
