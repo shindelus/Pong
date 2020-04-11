@@ -1,5 +1,8 @@
+#include <iostream>
+#include <string>
 #include "ball.h"
 #include "paddle.h"
+#include "vertices.h"
 
 
 class Game
@@ -15,9 +18,14 @@ public:
     float windowWidth;
     float countDownToStart;
     int curveCountdown;
+    std::string message;
     bool compWaiting;
     bool curve;
     bool clockWiseCurve;
+    bool levelUp;
+    bool lost;
+    bool p1Scored;
+    bool p2Scored;
     
     Game(float& wH, float& wW);
     ~Game(){};
@@ -40,4 +48,5 @@ public:
     void MoveComputerPaddle(Paddle& p, Ball& b);
     void MoveBall(Paddle& p1, Paddle& p2, Ball& b);
     void CheckBallDirection(Ball& b);
+    void AddText(Vertices& v);
 };

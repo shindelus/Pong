@@ -1,5 +1,7 @@
 #include <iostream>
 #include "game.h"
+#include "word.h"
+#include "vertices.h"
 
 void Game::CheckForLeftCollision(Paddle& p, Ball& b)
 {
@@ -23,9 +25,7 @@ void Game::CheckForLeftCollision(Paddle& p, Ball& b)
         b.Xposition = p.Xposition - b.width;
         b.Xspeed = - b.Xspeed;
         clockWiseCurve = !clockWiseCurve;
-        
-        printf("--------HIT RIGHT----------\n");
-        
+    
     }
 };
 
@@ -37,8 +37,6 @@ void Game::CheckForRightCollision(Paddle& p, Ball& b)
     {
         b.Xposition = p.Xposition + p.width;
         b.Xspeed = -b.Xspeed;
-        printf("---------HIT LEFT----------\n");
-        
         if (curve)
         {
             clockWiseCurve = !clockWiseCurve;
@@ -104,16 +102,12 @@ void Game::CheckForBallYBounds(Ball& b)
         b.Yposition = windowHeight - b.height - 60.0f;
         b.Yspeed = - b.Yspeed;
         b.direction = 26 - b.direction;
-        printf("--------HIT TOP----------\n");
-
 
     } else if (b.Yposition + b.Yspeed < 0.0f && b.Yspeed < 0)
     {
         b.Yposition = 0.0f;
         b.Yspeed = - b.Yspeed;
         b.direction = 26 - b.direction;
-        printf("--------HIT BOTTOM--------\n");
-
 
     }
 };
@@ -231,6 +225,63 @@ void Game::MovePaddleDown(Paddle& p)
     }
 };
 
+void Game::AddText(Vertices& v)
+{
+    if (levelUp)
+    {
+        message = "    you win    ";
+        levelUp = false;
+    } else if (lost)
+    {
+        message = "   you lose   ";
+        lost = false;
+    } else if (p1Scored)
+    {
+        message = "computer scores";
+        p1Scored = false;
+    } else if (p2Scored)
+    {
+        message = " player scores ";
+        p2Scored = false;
+    }
+    
+    if (countDownToStart > 200.0f && countDownToStart < 300.0f)
+    {
+        Word w(message, 400.0f, 400.0f, 50.0f, v);
+    }
+    if (countDownToStart > 150.0f && countDownToStart < 200.0f)
+    {
+        Word w("start", 570.0f, 400.0f, 50.0f, v);
+
+    } else if (countDownToStart > 100.0f && countDownToStart < 150.0f)
+    {
+        Word w("3", 650.0f, 400.0f, 50.0f, v);
+
+    } else if (countDownToStart > 50.0f && countDownToStart < 100.0f)
+    {
+        Word w("2", 650.0f, 400.0f, 50.0f, v);
+
+    } else if (countDownToStart > 0.0f && countDownToStart < 50.0f)
+    {
+        Word w("1", 650.0f, 400.0f, 50.0f, v);
+    }
+    
+    std::stringstream p1ScoreStr;
+    p1ScoreStr << player1Score;
+    Word scoreP1(p1ScoreStr.str(), 30.0f, windowHeight - 45.0f, 35.0f, v);
+    
+    std::stringstream p2ScoreStr;
+    p2ScoreStr << player2Score;
+    Word scoreP2(p2ScoreStr.str(), windowWidth - 50.0f, windowHeight - 45.0f, 35.0f, v);
+    
+    std::stringstream levelStr;
+    levelStr << level;
+    Word level("level " + levelStr.str(), (windowWidth/2) - 75.0f, windowHeight - 45.0f, 35.0f, v);
+
+    Vertex vertices[v.m_vertData.size()];
+    std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
+}
+
 void Game::CheckBallDirection(Ball& b)
 {
     
@@ -259,7 +310,6 @@ void Game::CheckBallDirection(Ball& b)
         {
             b.direction--;
         }
-        
                 
         if (b.direction > 13)
         {
@@ -300,9 +350,11 @@ void Game::MoveBall(Paddle& p1, Paddle& p2, Ball& b)
     if (BallIsOutLeft(b))
     {
         player2Score++;
-        if (player2Score == 1)
+        p2Scored = true;
+        if (player2Score == 7)
         {
             level++;
+            levelUp = true;
             b.speed = b.speed + 3.0f;
         }
         ResetLevel(p1, p2, b);
@@ -310,9 +362,11 @@ void Game::MoveBall(Paddle& p1, Paddle& p2, Ball& b)
     } else if (BallIsOutRight(b))
     {
         player1Score++;
+        p1Scored = true;
         if (player1Score == 7)
         {
             level = 1;
+            lost = true;
             ResetGame(p1, p2, b);
         } else {
             ResetLevel(p1, p2, b);
@@ -333,7 +387,7 @@ void Game::ResetLevel(Paddle& p1, Paddle& p2, Ball& b)
     b.direction = 10;
     b.Xspeed = b.speed * b.Xangle[b.direction];
     b.Yspeed = b.speed * b.Yangle[b.direction];
-    countDownToStart = 200.0f;
+    countDownToStart = 300.0f;
     currentCompDelay = 0;
     compDelay = 0;
     curve = false;
@@ -347,6 +401,7 @@ void Game::ResetGame(Paddle& p1, Paddle& p2, Ball& b)
     level = 1;
     ResetLevel(p1, p2, b);
     compDelay = 0.0f;
+    countDownToStart = 200.0f;
 };
 
 void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b)
@@ -383,4 +438,8 @@ Game::Game(float& wH, float& wW)
     compWaiting = false;
     curve = false;
     clockWiseCurve = false;
+    levelUp = false;
+    lost = false;
+    p1Scored = false;
+    p2Scored = false;
 }

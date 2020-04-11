@@ -165,41 +165,11 @@ int main(void)
         v.AddVertData(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
         v.AddVertData(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
         
-        if (game.countDownToStart > 150.0f && game.countDownToStart <= 200.0f)
-        {
-            Word w("start", 570.0f, 400.0f, 50.0f, v);
-
-        } else if (game.countDownToStart > 100.0f && game.countDownToStart <= 150.0f)
-        {
-            Word w("  3  ", 570.0f, 400.0f, 50.0f, v);
-
-        } else if (game.countDownToStart > 50.0f && game.countDownToStart <= 100.0f)
-        {
-            Word w("  2  ", 570.0f, 400.0f, 50.0f, v);
-
-        } else if (game.countDownToStart > 0.0f && game.countDownToStart <= 50.0f)
-        {
-            Word w("  1  ", 570.0f, 400.0f, 50.0f, v);
-        }
+        game.AddText(v);
         
-        std::stringstream p1ScoreStr;
-        p1ScoreStr << game.player1Score;
-        Word scoreP1(p1ScoreStr.str(), 30.0f, game.windowHeight - 45.0f, 35.0f, v);
-        
-        std::stringstream p2ScoreStr;
-        p2ScoreStr << game.player2Score;
-        Word scoreP2(p2ScoreStr.str(), game.windowWidth - 50.0f, game.windowHeight - 45.0f, 35.0f, v);
-        
-        std::stringstream levelStr;
-        levelStr << game.level;
-        Word level("level " + levelStr.str(), (game.windowWidth/2) - 75.0f, game.windowHeight - 45.0f, 35.0f, v);
-
-
         Vertex vertices[v.m_vertData.size()];
         std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
         
-        printf("size of vertices is %lu\n", sizeof(vertices[0]));
-
         int filler[1000];
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Add the data to the buffer
