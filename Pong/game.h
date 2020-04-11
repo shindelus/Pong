@@ -49,4 +49,5 @@ public:
     void MoveBall(Paddle& p1, Paddle& p2, Ball& b);
     void CheckBallDirection(Ball& b);
     void AddText(Vertices& v);
+    void CreateBall(float left, float bottom, float width, float height, Vertices& v);
 };

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include "game.h"
 #include "word.h"
 #include "vertices.h"
@@ -280,6 +281,25 @@ void Game::AddText(Vertices& v)
 
     Vertex vertices[v.m_vertData.size()];
     std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
+}
+
+void Game::CreateBall(float left, float bottom, float width, float height, Vertices& v)
+{
+    
+    float dia = 25.0f;
+    float angle = 5.0f;
+    while (angle < 90.0f)
+    {
+        float rad = angle * (3.14159f / 180.0f);
+        float horiz = sin(rad) * dia;
+        float vert = cos(rad) * dia;
+        float l = (dia - horiz) / 2;
+        float b = (dia - vert) / 2;
+        float w = horiz;
+        float h = vert;
+        v.AddVertData(left + l, bottom + b, w, h);
+        angle = angle + 5.0f;
+    }
 }
 
 void Game::CheckBallDirection(Ball& b)

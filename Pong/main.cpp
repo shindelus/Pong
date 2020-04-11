@@ -160,11 +160,11 @@ int main(void)
         
         Vertices v;
 
-        v.AddVertData(ball.Xposition, ball.Yposition, ball.width, ball.height);
+        game.CreateBall(ball.Xposition, ball.Yposition, ball.width, ball.height, v);
         v.AddVertData(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
         v.AddVertData(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
         v.AddVertData(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
-        
+            
         game.AddText(v);
         
         Vertex vertices[v.m_vertData.size()];
