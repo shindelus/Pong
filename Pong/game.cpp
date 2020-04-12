@@ -387,8 +387,10 @@ void Game::MoveBall(Paddle& p1, Paddle& p2, Ball& b)
         if (player2Score == 7)
         {
             level++;
+            player1Score = 0;
+            player2Score = 0;
             levelUp = true;
-            b.speed = b.speed + 3.0f;
+            b.speed = b.speed + 2.0f;
             player2Score = 0;
         }
         ResetLevel(p1, p2, b);
@@ -433,27 +435,27 @@ void Game::UpdateColor()
         redLo =    0.0f;
         red =      0.0f;
         greenHi =  1.0f;
-        greenLo =  0.0f;
+        greenLo =  0.5f;
         green =    1.0f;
         blueHi =   1.0f;
-        blueLo =   0.0f;
-        blue =     0.0f;
+        blueLo =   0.5f;
+        blue =     0.5f;
         rIncrement = 0.00f;
         gIncrement = 0.03f;
         bIncrement = 0.03f;
     } else if (level == 3)
     {
         redHi =    1.0f;
-        redLo =    0.0f;
-        red =      0.0f;
+        redLo =    0.5f;
+        red =      0.5f;
         greenHi =  1.0f;
-        greenLo =  0.0f;
+        greenLo =  0.5f;
         green =    1.0f;
         blueHi =   0.0f;
         blueLo =   0.0f;
         blue =     0.0f;
-        rIncrement = 0.03f;
-        gIncrement = 0.03f;
+        rIncrement = 0.02f;
+        gIncrement = 0.02f;
         bIncrement = 0.00f;
     } else if (level == 4)
     {
@@ -485,17 +487,17 @@ void Game::UpdateColor()
         bIncrement = 0.0f;
     } else if (level == 6)
     {
-        redHi =    0.8f;
-        redLo =    0.3f;
-        red =      0.8f;
-        greenHi =  0.1f;
-        greenLo =  0.1f;
-        green =    0.1f;
+        redHi =    0.1f;
+        redLo =    0.1f;
+        red =      0.1f;
+        greenHi =  0.8f;
+        greenLo =  0.3f;
+        green =    0.8f;
         blueHi =   1.0f;
         blueLo =   1.0f;
         blue =     1.0f;
-        rIncrement = 0.01f;
-        gIncrement = 0.0f;
+        rIncrement = 0.0f;
+        gIncrement = 0.01f;
         bIncrement = 0.0f;
     } else if (level == 7)
     {
@@ -549,12 +551,11 @@ void Game::ResetLevel(Paddle& p1, Paddle& p2, Ball& b)
     p2.Yposition = (windowHeight/2.0f) - 70.0f;
     b.Xposition = 100.0f;
     b.Yposition = 387.5f;
-    b.speed = 17.0f;
     b.direction = 10;
     b.Xspeed = b.speed * b.Xangle[b.direction];
     b.Yspeed = b.speed * b.Yangle[b.direction];
     currentCompDelay = 0;
-    compDelay = 0;
+    compDelay = 0.0f;
     curve = false;
     clockWiseCurve = false;
     UpdateColor();
@@ -599,7 +600,7 @@ Game::Game(float& wH, float& wW)
     windowHeight = wH;
     windowWidth = wW;
     countDownToStart = 200.0f;
-    compDelay = 0;
+    compDelay = 0.0f;
     currentCompDelay = 0;
     compWaiting = false;
     curve = false;
