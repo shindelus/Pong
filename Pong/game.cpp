@@ -413,6 +413,27 @@ void Game::MoveBall(Paddle& p1, Paddle& p2, Ball& b)
     }
 };
 
+void Game::ChangeColor()
+{
+    if (red > redHi)
+        rIncrement = -0.03f;
+    else if (red < redLo)
+        rIncrement = 0.03f;
+    red += rIncrement;
+
+    if (green > greenHi)
+        gIncrement = -gIncrement;
+    else if (green < greenLo)
+        gIncrement = -gIncrement;
+    green += gIncrement;
+
+    if (blue > blueHi)
+        bIncrement = -bIncrement;
+    else if (blue < blueLo)
+        bIncrement = -bIncrement;
+    blue += bIncrement;
+};
+
 void Game::UpdateColor()
 {
     if (level == 1)
@@ -542,7 +563,6 @@ void Game::UpdateColor()
         gIncrement = 0.03f;
         bIncrement = 0.0f;
     }
-
 }
 
 void Game::ResetLevel(Paddle& p1, Paddle& p2, Ball& b)
@@ -571,16 +591,21 @@ void Game::ResetGame(Paddle& p1, Paddle& p2, Ball& b)
     countDownToStart = 200.0f;
 };
 
+void Game::CheckPaddleMovement(Paddle& p)
+{
+    if (p.isMovingUp)
+    {
+        MovePaddleUp(p);
+    } else if (p.isMovingDown)
+    {
+        MovePaddleDown(p);
+    }
+}
+
 void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b)
 {
-    if (curve && curveCountdown == 0 && countDownToStart == 0)
-    {
-        printf("CLOCKWISE --- %d\n", clockWiseCurve);
-        printf("DIRECTION --- %d\n", b.direction);
-        printf("COUNTDOWN --- %d\n", curveCountdown);
-        printf("----------------\n");
-    }
-
+    ChangeColor();
+    CheckPaddleMovement(p2);
     if (countDownToStart != 0)
     {
         countDownToStart--;

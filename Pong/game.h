@@ -63,4 +63,6 @@ public:
     void AddText(Vertices& v);
     void CreateBall(float left, float bottom, float width, float height, Vertices& v);
     void UpdateColor();
+    void ChangeColor();
+    void CheckPaddleMovement(Paddle& p);
 };

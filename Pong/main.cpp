@@ -172,40 +172,9 @@ int main(void)
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Add the data to the buffer
         glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(filler), filler);
-        
         renderer.Draw(va, ib, shader);
         
-        
-        if (paddle2.isMovingUp)
-        {
-            game.MovePaddleUp(paddle2);
-        } else if (paddle2.isMovingDown)
-        {
-            game.MovePaddleDown(paddle2);
-        }
-        
-        
         game.OnUpdate(paddle1, paddle2, ball);
-        
-        
-        if (game.red > game.redHi)
-            game.rIncrement = -0.03f;
-        else if (game.red < game.redLo)
-            game.rIncrement = 0.03f;
-        game.red += game.rIncrement;
-
-        if (game.green > game.greenHi)
-            game.gIncrement = -game.gIncrement;
-        else if (game.green < game.greenLo)
-            game.gIncrement = -game.gIncrement;
-        game.green += game.gIncrement;
-
-        if (game.blue > game.blueHi)
-            game.bIncrement = -game.bIncrement;
-        else if (game.blue < game.blueLo)
-            game.bIncrement = -game.bIncrement;
-        game.blue += game.bIncrement;
-            
         
         glfwSwapBuffers(window); // Swap front and back buffers
         glfwPollEvents(); // Poll for and process events
