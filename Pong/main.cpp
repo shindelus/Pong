@@ -147,8 +147,6 @@ int main(void)
     glfwSetKeyCallback(window, key_callback);
 
     // Animation stuff
-    float r = 0.0f;
-    float increment = 0.05f;
 
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
@@ -156,8 +154,8 @@ int main(void)
         renderer.Clear();
 
         shader.Bind();
-        shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
-        
+        shader.SetUniform4f("u_Color", game.red, game.green, game.blue, 1.0);
+
         Vertices v;
 
         game.CreateBall(ball.Xposition, ball.Yposition, ball.width, ball.height, v);
@@ -190,13 +188,25 @@ int main(void)
         game.OnUpdate(paddle1, paddle2, ball);
         
         
-        // Animate the r value between 0.0 and 1.0
-        if (r > 1.0f)
-            increment = -0.05f;
-        else if (r < 0.0f)
-            increment = 0.05f;
-        r += increment;
+        if (game.red > game.redHi)
+            game.rIncrement = -0.03f;
+        else if (game.red < game.redLo)
+            game.rIncrement = 0.03f;
+        game.red += game.rIncrement;
 
+        if (game.green > game.greenHi)
+            game.gIncrement = -game.gIncrement;
+        else if (game.green < game.greenLo)
+            game.gIncrement = -game.gIncrement;
+        game.green += game.gIncrement;
+
+        if (game.blue > game.blueHi)
+            game.bIncrement = -game.bIncrement;
+        else if (game.blue < game.blueLo)
+            game.bIncrement = -game.bIncrement;
+        game.blue += game.bIncrement;
+            
+        
         glfwSwapBuffers(window); // Swap front and back buffers
         glfwPollEvents(); // Poll for and process events
         

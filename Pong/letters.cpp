@@ -260,7 +260,7 @@ void Letters::Create6(Vertices& v)
     CreateVertRightBottomHalfShort(v);
     CreateHorizTopShort(v);
     CreateHorizBottomShort(v);
-    CreateHorizMiddleFull(v);
+    CreateHorizMiddleShort(v);
 }
 
 void Letters::Create7(Vertices& v)

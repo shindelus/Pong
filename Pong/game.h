@@ -17,6 +17,18 @@ public:
     float windowHeight;
     float windowWidth;
     float countDownToStart;
+    float rIncrement;
+    float gIncrement;
+    float bIncrement;
+    float red;
+    float green;
+    float blue;
+    float redHi;
+    float redLo;
+    float blueHi;
+    float blueLo;
+    float greenHi;
+    float greenLo;
     int curveCountdown;
     std::string message;
     bool compWaiting;
@@ -50,4 +62,5 @@ public:
     void CheckBallDirection(Ball& b);
     void AddText(Vertices& v);
     void CreateBall(float left, float bottom, float width, float height, Vertices& v);
+    void UpdateColor();
 };
