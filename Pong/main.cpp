@@ -27,7 +27,6 @@
 #include "glm/glm/gtc/matrix_transform.hpp"
 
 
-
 float windowHeight = 800.0f;
 float windowWidth = 1300.0f;
 
@@ -131,7 +130,7 @@ int main(void)
 //    glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
 //    glm::mat4 mvp = proj * view * model;
            
-    Shader shader("Pong/basic.shader");
+    Shader shader("basic.shader");
     shader.Bind();
     shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
     shader.SetUniformMat4f("u_MVP", proj);
