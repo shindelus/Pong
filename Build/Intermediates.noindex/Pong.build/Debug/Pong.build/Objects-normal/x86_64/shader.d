@@ -141,7 +141,8 @@ dependencies: /Users/shindelu/Pong/Pong/shader.cpp \
   /Users/shindelu/Pong/Pong/glm/glm/vector_relational.hpp \
   /Users/shindelu/Pong/Pong/glm/glm/integer.hpp \
   /Users/shindelu/Pong/Pong/glm/glm/detail/func_integer.inl \
-  /Users/shindelu/Pong/Pong/renderer.h /usr/local/include/GL/glew.h \
+  /Users/shindelu/Pong/Pong/renderer.h \
+  /Users/shindelu/Pong/Pong/glew/include/GL/glew.h \
   /Users/shindelu/Pong/Pong/vertexarray.h \
-  /Users/shindelu/Pong/Pong/vertexBuffer.h \
+  /Users/shindelu/Pong/Pong/vertexbuffer.h \
   /Users/shindelu/Pong/Pong/indexbuffer.h

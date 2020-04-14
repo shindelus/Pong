@@ -1,8 +1,9 @@
 dependencies: /Users/shindelu/Pong/Pong/vertexarray.cpp \
   /Users/shindelu/Pong/Pong/vertexarray.h \
-  /Users/shindelu/Pong/Pong/vertexBuffer.h \
+  /Users/shindelu/Pong/Pong/vertexbuffer.h \
   /Users/shindelu/Pong/Pong/vertexbufferlayout.h \
-  /usr/local/include/GL/glew.h /Users/shindelu/Pong/Pong/renderer.h \
+  /Users/shindelu/Pong/Pong/glew/include/GL/glew.h \
+  /Users/shindelu/Pong/Pong/renderer.h \
   /Users/shindelu/Pong/Pong/indexbuffer.h \
   /Users/shindelu/Pong/Pong/shader.h \
   /Users/shindelu/Pong/Pong/glm/glm/glm.hpp \
