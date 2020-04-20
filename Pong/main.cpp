@@ -27,6 +27,13 @@
 #include "glm/glm/gtc/matrix_transform.hpp"
 
 
+#include <netinet/in.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <netdb.h>
+
+
 float windowHeight = 800.0f;
 float windowWidth = 1300.0f;
 
@@ -60,6 +67,70 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 int main(void)
 {
+
+    int fd;
+    
+    short int myport = 8888;
+
+    if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+        perror("cannot create socket");
+        return 1;
+    }
+    
+    struct sockaddr_in myaddr;
+
+    /* bind to an arbitrary return address */
+    /* because this is the client side, we don't care about the address */
+    /* since no application will initiate communication here - it will */
+    /* just send responses */
+    /* INADDR_ANY is the IP address and 0 is the socket */
+    /* htonl converts a long integer (e.g. address) to a network representation */
+    /* htons converts a short integer (e.g. port) to a network representation */
+
+    memset((char *)&myaddr, 0, sizeof(myaddr));
+    myaddr.sin_family = AF_INET;
+    myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    myaddr.sin_port = htons(myport);
+
+//        if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
+//            perror("bind failed");
+//            return 1;
+//        }
+    
+    
+    
+    int port = 1153;
+    
+    struct hostent *hp;     /* host information */
+    struct sockaddr_in servaddr;    /* server address */
+
+    /* fill in the server's address and data */
+    memset((char*)&servaddr, 0, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_port = htons(port);
+
+    
+    char *host = "192.168.0.20";
+    /* look up the address of the server given its name */
+    hp = gethostbyname(host);
+    if (!hp) {
+        fprintf(stderr, "could not obtain address of %s\n", host);
+    }
+
+    /* put the host's address into the server address structure */
+    memcpy((void *)&servaddr.sin_addr, hp->h_addr_list[0], hp->h_length);
+
+
+    /* send a message to the server */
+    char *my_message = "this is a new test message";
+    if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
+        perror("sendto failed");
+    }
+        
+    
+    
+    
+    
     GLFWwindow* window;
     
     // Initialize the library
@@ -150,6 +221,7 @@ int main(void)
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
     {
+        
         renderer.Clear();
 
         shader.Bind();
@@ -166,6 +238,20 @@ int main(void)
         
         Vertex vertices[v.m_vertData.size()];
         std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
+        
+        if (paddle1.isMovingUp)
+        {
+            char *my_message = "MOVING UP!!!";
+            if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
+                perror("sendto failed");
+            }
+        } else if (paddle1.isMovingDown)
+        {
+            char *my_message = "MOVING DOWN!!!";
+            if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
+                perror("sendto failed");
+            }
+        }
         
         int filler[1000];
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
