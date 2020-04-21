@@ -604,16 +604,16 @@ void Game::CheckPaddleMovement(Paddle& p)
 
 void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b)
 {
-    ChangeColor();
-    CheckPaddleMovement(p2);
+//    ChangeColor();
+//    CheckPaddleMovement(p2);
     if (countDownToStart != 0)
     {
         countDownToStart--;
     } else {
-        CheckForCollisions(p1, p2, b);
-        MoveComputerPaddle(p1, b);
-        MoveComputerPaddle(p2, b);
-        MoveBall(p1, p2, b);
+//        CheckForCollisions(p1, p2, b);
+//        MoveComputerPaddle(p1, b);
+//        MoveComputerPaddle(p2, b);
+//        MoveBall(p1, p2, b);
     }
 };
 

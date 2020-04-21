@@ -32,6 +32,12 @@
 #include <sys/socket.h>
 #include <stdlib.h>
 #include <netdb.h>
+#include <sys/types.h>
+
+
+
+#define BUFLEN 2048
+#define MSGS 5
 
 
 float windowHeight = 800.0f;
@@ -69,6 +75,10 @@ int main(void)
 {
 
     int fd;
+    
+    float buf[BUFLEN];
+    
+    int recvlen;
     
     short int myport = 8888;
 
@@ -120,12 +130,23 @@ int main(void)
     /* put the host's address into the server address structure */
     memcpy((void *)&servaddr.sin_addr, hp->h_addr_list[0], hp->h_length);
 
+    socklen_t slen = sizeof(servaddr);
 
     /* send a message to the server */
-    char *my_message = "this is a new test message";
-    if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
+    float my_message[5] = { 10.0f, 20.0f, 30.0f, 40.0f , 50.0f };
+    if (sendto(fd, &my_message, sizeof(my_message), 0, (struct sockaddr *)&servaddr, slen) < 0) {
         perror("sendto failed");
     }
+    recvlen = recvfrom(fd, buf, BUFLEN, 0, (struct sockaddr *)&servaddr, &slen);
+    if (recvlen >= 0) {
+            buf[recvlen] = 0;
+            printf("%f\n", (float)buf[0]);
+            printf("%f\n", (float)buf[1]);
+            printf("%f\n", (float)buf[2]);
+            printf("%f\n", (float)buf[3]);
+            printf("%f\n", (float)buf[4]);
+    }
+//
         
     
     
@@ -219,6 +240,7 @@ int main(void)
     // Animation stuff
 
     // Loop until the user closes the window
+    
     while (!glfwWindowShouldClose(window))
     {
         
@@ -239,19 +261,29 @@ int main(void)
         Vertex vertices[v.m_vertData.size()];
         std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
         
-        if (paddle1.isMovingUp)
-        {
-            char *my_message = "MOVING UP!!!";
-            if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
-                perror("sendto failed");
-            }
-        } else if (paddle1.isMovingDown)
-        {
-            char *my_message = "MOVING DOWN!!!";
-            if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
-                perror("sendto failed");
-            }
-        }
+//        if (paddle2.isMovingUp)
+//        {
+//            char *my_message = "MOVING UP!!!";
+//            if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
+//                perror("sendto failed");
+//            }
+//            recvlen = recvfrom(fd, buf, BUFLEN, 0, (struct sockaddr *)&servaddr, &slen);
+//            if (recvlen >= 0) {
+//        //                buf[recvlen] = 0;    /* expect a printable string - terminate it */
+//                    printf("received message: \"%s\"\n", buf);
+//            }
+//        } else if (paddle2.isMovingDown)
+//        {
+//            char *my_message = "MOVING DOWN!!!";
+//            if (sendto(fd, my_message, strlen(my_message), 0, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
+//                perror("sendto failed");
+//            }
+//            recvlen = recvfrom(fd, buf, BUFLEN, 0, (struct sockaddr *)&servaddr, &slen);
+//            if (recvlen >= 0) {
+//        //                buf[recvlen] = 0;    /* expect a printable string - terminate it */
+//                printf("received message: \"%s\"\n", buf);
+//            }
+//        }
         
         int filler[1000];
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
