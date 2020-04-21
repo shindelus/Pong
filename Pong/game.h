@@ -1,8 +1,10 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include "ball.h"
 #include "paddle.h"
 #include "vertices.h"
+#include "transfer.h"
 
 
 class Game
@@ -54,7 +56,7 @@ public:
     void CheckForBallYBounds(Ball& b);
     void ResetLevel(Paddle& p1, Paddle& p2, Ball& b);
     void ResetGame(Paddle& p1, Paddle& p2, Ball& b);
-    void OnUpdate(Paddle& p1, Paddle& p2, Ball& b);
+    void OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t);
     void MovePaddleUp(Paddle& p);
     void MovePaddleDown(Paddle& p);
     void MoveComputerPaddle(Paddle& p, Ball& b);
@@ -64,5 +66,5 @@ public:
     void CreateBall(float left, float bottom, float width, float height, Vertices& v);
     void UpdateColor();
     void ChangeColor();
-    void CheckPaddleMovement(Paddle& p);
+    void CheckPaddleMovement(Paddle& p1, Paddle& p2, Transfer& t);
 };

@@ -25,6 +25,7 @@
 		0EE71868244529BF0035D333 /* libGLEW.2.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0EE71866244529BE0035D333 /* libGLEW.2.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0EED6B052446257D007DF40E /* libglfw.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE71862244529A60035D333 /* libglfw.3.dylib */; };
 		0EED6B0624462592007DF40E /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE71866244529BE0035D333 /* libGLEW.2.1.0.dylib */; };
+		DE13E7B5244EAFCC00CF4545 /* transfer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE13E7B3244EAFCC00CF4545 /* transfer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +94,8 @@
 		0EE71874244613590035D333 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = Pong/glew/lib/libGLEW.a; sourceTree = "<group>"; };
 		0EE718762446136E0035D333 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		0EE71878244613790035D333 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		DE13E7B3244EAFCC00CF4545 /* transfer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = transfer.cpp; sourceTree = "<group>"; };
+		DE13E7B4244EAFCC00CF4545 /* transfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transfer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +164,8 @@
 				0E840FF02440DB74001DF5DE /* letters.h */,
 				0E840FF224413BDC001DF5DE /* word.cpp */,
 				0E840FF324413BDC001DF5DE /* word.h */,
+				DE13E7B3244EAFCC00CF4545 /* transfer.cpp */,
+				DE13E7B4244EAFCC00CF4545 /* transfer.h */,
 			);
 			path = Pong;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				0E81F595243AE2D200069A56 /* shader.cpp in Sources */,
 				0E81F581243AC2E100069A56 /* main.cpp in Sources */,
 				0EBC39B9243BE2990074F6E2 /* ball.cpp in Sources */,
+				DE13E7B5244EAFCC00CF4545 /* transfer.cpp in Sources */,
 				0E840FF424413BDC001DF5DE /* word.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

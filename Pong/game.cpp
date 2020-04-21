@@ -3,6 +3,7 @@
 #include "game.h"
 #include "word.h"
 #include "vertices.h"
+#include "transfer.h"
 
 void Game::CheckForLeftCollision(Paddle& p, Ball& b)
 {
@@ -222,7 +223,7 @@ void Game::MovePaddleDown(Paddle& p)
 {
     if (!isPaddleAtBottom(p))
     {
-        p.Yposition = p.Yposition - p.Yspeed;
+        p.Yposition = p.Yposition - p.Yspeed;        
     }
 };
 
@@ -591,21 +592,30 @@ void Game::ResetGame(Paddle& p1, Paddle& p2, Ball& b)
     countDownToStart = 200.0f;
 };
 
-void Game::CheckPaddleMovement(Paddle& p)
+void Game::CheckPaddleMovement(Paddle& p1, Paddle& p2, Transfer& t)
 {
-    if (p.isMovingUp)
+    if (p2.isMovingUp)
     {
-        MovePaddleUp(p);
-    } else if (p.isMovingDown)
+        MovePaddleUp(p2);
+    } else if (p2.isMovingDown)
     {
-        MovePaddleDown(p);
+        MovePaddleDown(p2);
     }
 }
 
-void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b)
+void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
 {
 //    ChangeColor();
-//    CheckPaddleMovement(p2);
+    
+    float p[] = { p2.Yposition };
+    
+    BallPos bp = t.SendPaddleDataAndUpdate(p);
+    
+    b.Xposition = bp.x;
+    b.Yposition = bp.y;
+    
+    
+    CheckPaddleMovement(p1, p2, t);
     if (countDownToStart != 0)
     {
         countDownToStart--;
