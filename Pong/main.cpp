@@ -197,7 +197,11 @@ int main(void)
                 Word c(" press 2 for 2 player online  ", 200.0f, 380.0f, 40.0f, v);
             }
             change--;
-        } else {
+        } else if (game.waitingForOpponent)
+        {
+            Word b("waiting for opponent", 360.0f, 440.0f, 40.0f, v);
+        } else if (game.playing)
+        {
             game.CreateBall(ball.Xposition, ball.Yposition, ball.width, ball.height, v);
             v.AddVertData(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
             v.AddVertData(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
@@ -218,10 +222,10 @@ int main(void)
         glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(filler), filler);
         renderer.Draw(va, ib, shader);
         
-        game.OnUpdate(paddle1, paddle2, ball, transfer);
-        
         glfwSwapBuffers(window); // Swap front and back buffers
         glfwPollEvents(); // Poll for and process events
+        
+        game.OnUpdate(paddle1, paddle2, ball, transfer);
         
         glBufferData(GL_ARRAY_BUFFER, 3000 * sizeof(Vertex), NULL, GL_STREAM_DRAW);
         

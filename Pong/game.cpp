@@ -361,11 +361,6 @@ void Game::MovePaddleDown(Paddle& p)
 
 void Game::AddTextForOnline(Vertices& v)
 {
-    if (messageNum == 9)
-    {
-        message = "waiting for opponent";
-    }
-
     if (messageNum == 5)
     {
         message = "player 1 scores";
@@ -677,10 +672,9 @@ void Game::CheckPaddleMovement(Paddle& p1, Paddle& p2, Transfer& t)
 void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
 {
     ChangeColor();
-    
     CheckPaddleMovement(p1, p2, t);
 
-    if (online == 2 && messageUpdateCountdown != 0)
+    if (online == 2 && messageUpdateCountdown != 0 && !playing)
     {
         messageUpdateCountdown--;
     } else if (online == 2 && messageUpdateCountdown == 0)
@@ -689,8 +683,9 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
         messageUpdateCountdown = 20;
     }
     
-    if (online == 1)
+    if (online == 1) // offline game
     {
+        playing = true;
         if (countDownToStart != 0)
         {
             countDownToStart--;
@@ -702,7 +697,7 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
         MoveComputerPaddle(p2, b);
     }
 
-    if (online == 2)
+    if (online == 2) // Online game
     {
         ServData clientData = { 0, p1.Yposition, p2.Yposition , 0, 0};
         if (messageNeedsUpdate == 1.0f)
@@ -715,14 +710,18 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
         printf("Received data --- %f\n", sd.a);
         if (sd.a == 0)  // Waiting for opponent
         {
-            messageNum = 9;
+            waitingForOpponent = true;
         } else if (sd.a == 1)  // Position update
         {
+            waitingForOpponent = false;
+            playing = true;
             b.Xposition = sd.b;
             b.Yposition = sd.c;
             p1.Yposition = sd.d;
         } else if (sd.a == 2)
         {
+            waitingForOpponent = false;
+            playing = true;
             player1Score = sd.b;  // Score update
             player2Score = sd.c;
             messageNum = sd.e;
@@ -763,4 +762,6 @@ Game::Game(float& wH, float& wW)
     messageNeedsUpdate = 0;
     online = 0;
     messageUpdateCountdown = 20;
+    waitingForOpponent = false;
+    playing = false;
 }

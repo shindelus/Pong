@@ -44,6 +44,8 @@ public:
     bool lost;
     bool p1Scored;
     bool p2Scored;
+    bool waitingForOpponent;
+    bool playing;
     
     
     Game(float& wH, float& wW);
