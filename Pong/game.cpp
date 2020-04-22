@@ -361,6 +361,10 @@ void Game::MovePaddleDown(Paddle& p)
 
 void Game::AddTextForOnline(Vertices& v)
 {
+    if (messageNum == 9)
+    {
+        message = "waiting for opponent";
+    }
 
     if (messageNum == 5)
     {
@@ -708,14 +712,18 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
         }
         ServData sd = t.SendPaddleDataAndUpdate(clientData);
         
-        if (sd.a == 0)
+        printf("Received data --- %f\n", sd.a);
+        if (sd.a == 0)  // Waiting for opponent
+        {
+            messageNum = 9;
+        } else if (sd.a == 1)  // Position update
         {
             b.Xposition = sd.b;
             b.Yposition = sd.c;
             p1.Yposition = sd.d;
-        } else if (sd.a == 1)
+        } else if (sd.a == 2)
         {
-            player1Score = sd.b;
+            player1Score = sd.b;  // Score update
             player2Score = sd.c;
             messageNum = sd.e;
         }
