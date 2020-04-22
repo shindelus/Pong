@@ -70,93 +70,18 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             paddle2.isMovingUp = false;
         }
     }
+    
+    if (key == GLFW_KEY_1 && game.online == 0)
+        game.online = 1;
+    if (key == GLFW_KEY_2 && game.online == 0)
+        game.online = 2;
 }
 
 int main(void)
 {
-
-//    int fd;
-//
-//    float buf[BUFLEN];
-//    
-//    int recvlen;
-//
-//    short int myport = 8888;
-//
-//    if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-//        perror("cannot create socket");
-//        return 1;
-//    }
-//
-//    struct sockaddr_in myaddr;
-//
-//    /* bind to an arbitrary return address */
-//    /* because this is the client side, we don't care about the address */
-//    /* since no application will initiate communication here - it will */
-//    /* just send responses */
-//    /* INADDR_ANY is the IP address and 0 is the socket */
-//    /* htonl converts a long integer (e.g. address) to a network representation */
-//    /* htons converts a short integer (e.g. port) to a network representation */
-//
-//    memset((char *)&myaddr, 0, sizeof(myaddr));
-//    myaddr.sin_family = AF_INET;
-//    myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-//    myaddr.sin_port = htons(myport);
-//
-//    if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
-//        perror("bind failed");
-//        return 1;
-//    }
-//
-//
-//
-//    int port = 1153;
-//
-//    struct hostent *hp;     /* host information */
-//    struct sockaddr_in servaddr;    /* server address */
-//
-//    /* fill in the server's address and data */
-//    memset((char*)&servaddr, 0, sizeof(servaddr));
-//    servaddr.sin_family = AF_INET;
-//    servaddr.sin_port = htons(port);
-//
-//
-//    char *host = "192.168.0.20";
-//    /* look up the address of the server given its name */
-//    hp = gethostbyname(host);
-//    if (!hp) {
-//        fprintf(stderr, "could not obtain address of %s\n", host);
-//    }
-//
-//    /* put the host's address into the server address structure */
-//    memcpy((void *)&servaddr.sin_addr, hp->h_addr_list[0], hp->h_length);
-//
-//    socklen_t slen = sizeof(servaddr);
-
-    
-    
-    
-    /* send a message to the server */
-//    float my_message[5] = { 10.0f, 20.0f, 30.0f, 40.0f , 50.0f };
-//    if (sendto(fd, &my_message, sizeof(my_message), 0, (struct sockaddr *)&servaddr, slen) < 0) {
-//        perror("sendto failed");
-//    }
-//    recvlen = recvfrom(fd, buf, BUFLEN, 0, (struct sockaddr *)&servaddr, &slen);
-//    if (recvlen >= 0) {
-//            buf[recvlen] = 0;
-//            printf("%f\n", (float)buf[0]);
-//            printf("%f\n", (float)buf[1]);
-//            printf("%f\n", (float)buf[2]);
-//            printf("%f\n", (float)buf[3]);
-//            printf("%f\n", (float)buf[4]);
-//    }
-//
-        
     
     Transfer transfer;
-    
 
-    
     GLFWwindow* window;
     
     // Initialize the library
@@ -245,6 +170,8 @@ int main(void)
     // Animation stuff
 
     // Loop until the user closes the window
+    int change = 150;
+    bool p1Text = true;
     
     while (!glfwWindowShouldClose(window))
     {
@@ -253,20 +180,39 @@ int main(void)
 
         shader.Bind();
         shader.SetUniform4f("u_Color", game.red, game.green, game.blue, 1.0);
-
+        
         Vertices v;
-
-        game.CreateBall(ball.Xposition, ball.Yposition, ball.width, ball.height, v);
-        v.AddVertData(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
-        v.AddVertData(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
-        v.AddVertData(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
-            
-        game.AddText(v);
+        
+        if (game.online == 0)
+        {
+            Word a("pong", 400.0f, 450.0f, 150.0f, v);
+            if (change == 0){
+                p1Text = !p1Text;
+                change = 150;
+            }
+            if (p1Text)
+            {
+                Word b("press 1 for player vs computer", 200.0f, 380.0f, 40.0f, v);
+            } else {
+                Word c(" press 2 for 2 player online  ", 200.0f, 380.0f, 40.0f, v);
+            }
+            change--;
+        } else {
+            game.CreateBall(ball.Xposition, ball.Yposition, ball.width, ball.height, v);
+            v.AddVertData(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);
+            v.AddVertData(paddle2.Xposition, paddle2.Yposition, paddle2.width, paddle2.height);
+            v.AddVertData(0.0f, windowHeight - 60.0f, windowWidth, 5.0f);
+                
+            if (game.online == 1)
+                game.AddTextForOffline(v);
+            else if (game.online == 2)
+                game.AddTextForOnline(v);
+        }
         
         Vertex vertices[v.m_vertData.size()];
         std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
         
-        int filler[1000];
+        int filler[2000] = {0};
         glBindBuffer(GL_ARRAY_BUFFER, 1); // Select the buffer to be drawn
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Add the data to the buffer
         glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(filler), filler);
@@ -277,7 +223,7 @@ int main(void)
         glfwSwapBuffers(window); // Swap front and back buffers
         glfwPollEvents(); // Poll for and process events
         
-        glBufferData(GL_ARRAY_BUFFER, 1000 * sizeof(Vertex), NULL, GL_STREAM_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 3000 * sizeof(Vertex), NULL, GL_STREAM_DRAW);
         
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }

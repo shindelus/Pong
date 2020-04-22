@@ -5,6 +5,138 @@
 #include "vertices.h"
 #include "transfer.h"
 
+
+void Game::UpdateColor()
+{
+    if (level == 1)
+    {
+        redHi =    0.8f;
+        redLo =    0.3f;
+        red =      0.8f;
+        greenHi =  0.1f;
+        greenLo =  0.1f;
+        green =    0.1f;
+        blueHi =   1.0f;
+        blueLo =   1.0f;
+        blue =     1.0f;
+        rIncrement = 0.005f;
+        gIncrement = 0.0f;
+        bIncrement = 0.0f;
+    } else if (level == 2)
+    {
+        redHi =    0.0f;
+        redLo =    0.0f;
+        red =      0.0f;
+        greenHi =  1.0f;
+        greenLo =  0.5f;
+        green =    1.0f;
+        blueHi =   1.0f;
+        blueLo =   0.5f;
+        blue =     0.5f;
+        rIncrement = 0.00f;
+        gIncrement = 0.03f;
+        bIncrement = 0.03f;
+    } else if (level == 3)
+    {
+        redHi =    1.0f;
+        redLo =    0.5f;
+        red =      0.5f;
+        greenHi =  1.0f;
+        greenLo =  0.5f;
+        green =    1.0f;
+        blueHi =   0.0f;
+        blueLo =   0.0f;
+        blue =     0.0f;
+        rIncrement = 0.02f;
+        gIncrement = 0.02f;
+        bIncrement = 0.00f;
+    } else if (level == 4)
+    {
+        redHi =    1.0f;
+        redLo =    0.0f;
+        red =      0.0f;
+        greenHi =  1.0f;
+        greenLo =  0.0f;
+        green =    1.0f;
+        blueHi =   1.0f;
+        blueLo =   1.0f;
+        blue =     1.0f;
+        rIncrement = 0.03f;
+        gIncrement = 0.03f;
+        bIncrement = 0.00f;
+    } else if (level == 5)
+    {
+        redHi =    0.9f;
+        redLo =    0.3f;
+        red =      0.9f;
+        greenHi =  0.4f;
+        greenLo =  0.4f;
+        green =    0.4f;
+        blueHi =   0.4f;
+        blueLo =   0.4f;
+        blue =     0.4f;
+        rIncrement = 0.01f;
+        gIncrement = 0.0f;
+        bIncrement = 0.0f;
+    } else if (level == 6)
+    {
+        redHi =    0.1f;
+        redLo =    0.1f;
+        red =      0.1f;
+        greenHi =  0.8f;
+        greenLo =  0.3f;
+        green =    0.8f;
+        blueHi =   1.0f;
+        blueLo =   1.0f;
+        blue =     1.0f;
+        rIncrement = 0.0f;
+        gIncrement = 0.01f;
+        bIncrement = 0.0f;
+    } else if (level == 7)
+    {
+        redHi =    0.9f;
+        redLo =    0.9f;
+        red =      0.9f;
+        greenHi =  0.6f;
+        greenLo =  0.3f;
+        green =    0.6f;
+        blueHi =   0.1f;
+        blueLo =   0.1f;
+        blue =     0.1f;
+        rIncrement = 0.0f;
+        gIncrement = 0.02f;
+        bIncrement = 0.0f;
+    } else if (level == 8)
+    {
+        redHi =    1.0f;
+        redLo =    1.0f;
+        red =      1.0f;
+        greenHi =  0.4f;
+        greenLo =  0.1f;
+        green =    0.4f;
+        blueHi =   0.1f;
+        blueLo =   0.1f;
+        blue =     0.1f;
+        rIncrement = 0.0f;
+        gIncrement = 0.02f;
+        bIncrement = 0.0f;
+    } else
+    {
+        redHi =    0.8f;
+        redLo =    0.3f;
+        red =      0.8f;
+        greenHi =  0.8f;
+        greenLo =  0.3f;
+        green =    0.8f;
+        blueHi =   1.0f;
+        blueLo =   1.0f;
+        blue =     1.0f;
+        rIncrement = 0.03f;
+        gIncrement = 0.03f;
+        bIncrement = 0.0f;
+    }
+}
+
 void Game::CheckForLeftCollision(Paddle& p, Ball& b)
 {
     bool ballWithinVertWindow = b.Yposition + b.height > p.Yposition && b.Yposition < p.Yposition + p.height;
@@ -227,56 +359,121 @@ void Game::MovePaddleDown(Paddle& p)
     }
 };
 
-void Game::AddText(Vertices& v)
+void Game::AddTextForOnline(Vertices& v)
+{
+
+    if (messageNum == 5)
+    {
+        message = "player 1 scores";
+        countDownToStart = 300.0f;
+    }
+    if (messageNum == 6)
+    {
+        message = "player 2 scores";
+        countDownToStart = 300.0f;
+    }
+    if (messageNum == 7)
+    {
+        message = " player 1 wins ";
+        countDownToStart = 300.0f;
+    }
+    if (messageNum == 8)
+    {
+        message = " player 2 wins ";
+        countDownToStart = 300.0f;
+    }
+    
+    if (messageNum > 4)
+    {
+        Word d(message, 400.0f, 380.0f, 50.0f, v);
+    }
+    else if (messageNum == 0)
+    {
+        Word e("", 570.0f, 380.0f, 50.0f, v);
+    }
+    else if (messageNum == 1)
+    {
+        Word f("start", 570.0f, 380.0f, 50.0f, v);
+    }
+    else if (messageNum == 2)
+    {
+        Word g("3", 650.0f, 380.0f, 50.0f, v);
+
+    }
+    else if (messageNum == 3)
+    {
+        Word h("2", 650.0f, 380.0f, 50.0f, v);
+
+    }
+    else if (messageNum == 4)
+    {
+        Word i("1", 650.0f, 380.0f, 50.0f, v);
+    }
+    
+    std::stringstream p1ScoreStr;
+    p1ScoreStr << player1Score;
+    Word scoreP1(p1ScoreStr.str(), 30.0f, windowHeight - 45.0f, 35.0f, v);
+    
+    std::stringstream p2ScoreStr;
+    p2ScoreStr << player2Score;
+    Word scoreP2(p2ScoreStr.str(), windowWidth - 50.0f, windowHeight - 45.0f, 35.0f, v);
+
+    Vertex vertices[v.m_vertData.size()];
+    std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
+}
+
+void Game::AddTextForOffline(Vertices& v)
 {
 
     if (p1Scored && !lost)
     {
         message = "computer scores";
-        p1Scored = false;
         countDownToStart = 300.0f;
+        p1Scored = false;
     }
     if (p2Scored && !levelUp)
     {
         message = " player scores ";
-        p2Scored = false;
         countDownToStart = 300.0f;
+        p2Scored = false;
     }
     if (lost)
     {
         message = "   you lose   ";
-        lost = false;
         countDownToStart = 300.0f;
+        lost = false;
     }
     if (levelUp)
     {
         message = "    you win    ";
-        levelUp = false;
         countDownToStart = 300.0f;
+        levelUp = false;
     }
-
     
     if (countDownToStart > 200.0f && countDownToStart <= 300.0f)
     {
-        Word w(message, 400.0f, 380.0f, 50.0f, v);
         levelUp = false;
         p1Scored = false;
         p2Scored = false;
         lost = false;
+        Word w(message, 400.0f, 380.0f, 50.0f, v);
     }
-    if (countDownToStart > 150.0f && countDownToStart <= 200.0f)
+
+    else if (countDownToStart > 150.0f && countDownToStart <= 200.0f)
     {
         Word w("start", 570.0f, 380.0f, 50.0f, v);
-
-    } else if (countDownToStart > 100.0f && countDownToStart <= 150.0f)
+    }
+    else if (countDownToStart > 100.0f && countDownToStart <= 150.0f)
     {
         Word w("3", 650.0f, 380.0f, 50.0f, v);
 
-    } else if (countDownToStart > 50.0f && countDownToStart <= 100.0f)
+    }
+    else if (countDownToStart > 50.0f && countDownToStart <= 100.0f)
     {
         Word w("2", 650.0f, 380.0f, 50.0f, v);
 
-    } else if (countDownToStart > 0.0f && countDownToStart <= 50.0f)
+    }
+    else if (countDownToStart > 0.0f && countDownToStart <= 50.0f)
     {
         Word w("1", 650.0f, 380.0f, 50.0f, v);
     }
@@ -435,136 +632,6 @@ void Game::ChangeColor()
     blue += bIncrement;
 };
 
-void Game::UpdateColor()
-{
-    if (level == 1)
-    {
-        redHi =    0.8f;
-        redLo =    0.3f;
-        red =      0.8f;
-        greenHi =  0.1f;
-        greenLo =  0.1f;
-        green =    0.1f;
-        blueHi =   1.0f;
-        blueLo =   1.0f;
-        blue =     1.0f;
-        rIncrement = 0.005f;
-        gIncrement = 0.0f;
-        bIncrement = 0.0f;
-    } else if (level == 2)
-    {
-        redHi =    0.0f;
-        redLo =    0.0f;
-        red =      0.0f;
-        greenHi =  1.0f;
-        greenLo =  0.5f;
-        green =    1.0f;
-        blueHi =   1.0f;
-        blueLo =   0.5f;
-        blue =     0.5f;
-        rIncrement = 0.00f;
-        gIncrement = 0.03f;
-        bIncrement = 0.03f;
-    } else if (level == 3)
-    {
-        redHi =    1.0f;
-        redLo =    0.5f;
-        red =      0.5f;
-        greenHi =  1.0f;
-        greenLo =  0.5f;
-        green =    1.0f;
-        blueHi =   0.0f;
-        blueLo =   0.0f;
-        blue =     0.0f;
-        rIncrement = 0.02f;
-        gIncrement = 0.02f;
-        bIncrement = 0.00f;
-    } else if (level == 4)
-    {
-        redHi =    1.0f;
-        redLo =    0.0f;
-        red =      0.0f;
-        greenHi =  1.0f;
-        greenLo =  0.0f;
-        green =    1.0f;
-        blueHi =   1.0f;
-        blueLo =   1.0f;
-        blue =     1.0f;
-        rIncrement = 0.03f;
-        gIncrement = 0.03f;
-        bIncrement = 0.00f;
-    } else if (level == 5)
-    {
-        redHi =    0.9f;
-        redLo =    0.3f;
-        red =      0.9f;
-        greenHi =  0.4f;
-        greenLo =  0.4f;
-        green =    0.4f;
-        blueHi =   0.4f;
-        blueLo =   0.4f;
-        blue =     0.4f;
-        rIncrement = 0.01f;
-        gIncrement = 0.0f;
-        bIncrement = 0.0f;
-    } else if (level == 6)
-    {
-        redHi =    0.1f;
-        redLo =    0.1f;
-        red =      0.1f;
-        greenHi =  0.8f;
-        greenLo =  0.3f;
-        green =    0.8f;
-        blueHi =   1.0f;
-        blueLo =   1.0f;
-        blue =     1.0f;
-        rIncrement = 0.0f;
-        gIncrement = 0.01f;
-        bIncrement = 0.0f;
-    } else if (level == 7)
-    {
-        redHi =    0.9f;
-        redLo =    0.9f;
-        red =      0.9f;
-        greenHi =  0.6f;
-        greenLo =  0.3f;
-        green =    0.6f;
-        blueHi =   0.1f;
-        blueLo =   0.1f;
-        blue =     0.1f;
-        rIncrement = 0.0f;
-        gIncrement = 0.02f;
-        bIncrement = 0.0f;
-    } else if (level == 8)
-    {
-        redHi =    1.0f;
-        redLo =    1.0f;
-        red =      1.0f;
-        greenHi =  0.4f;
-        greenLo =  0.1f;
-        green =    0.4f;
-        blueHi =   0.1f;
-        blueLo =   0.1f;
-        blue =     0.1f;
-        rIncrement = 0.0f;
-        gIncrement = 0.02f;
-        bIncrement = 0.0f;
-    } else
-    {
-        redHi =    0.8f;
-        redLo =    0.3f;
-        red =      0.8f;
-        greenHi =  0.8f;
-        greenLo =  0.3f;
-        green =    0.8f;
-        blueHi =   1.0f;
-        blueLo =   1.0f;
-        blue =     1.0f;
-        rIncrement = 0.03f;
-        gIncrement = 0.03f;
-        bIncrement = 0.0f;
-    }
-}
 
 void Game::ResetLevel(Paddle& p1, Paddle& p2, Ball& b)
 {
@@ -605,25 +672,53 @@ void Game::CheckPaddleMovement(Paddle& p1, Paddle& p2, Transfer& t)
 
 void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
 {
-//    ChangeColor();
-    
-    float p[] = { p2.Yposition };
-    
-    BallPos bp = t.SendPaddleDataAndUpdate(p);
-    
-    b.Xposition = bp.x;
-    b.Yposition = bp.y;
-    
+    ChangeColor();
     
     CheckPaddleMovement(p1, p2, t);
-    if (countDownToStart != 0)
+
+    if (online == 2 && messageUpdateCountdown != 0)
     {
-        countDownToStart--;
-    } else {
-//        CheckForCollisions(p1, p2, b);
-//        MoveComputerPaddle(p1, b);
-//        MoveComputerPaddle(p2, b);
-//        MoveBall(p1, p2, b);
+        messageUpdateCountdown--;
+    } else if (online == 2 && messageUpdateCountdown == 0)
+    {
+        messageNeedsUpdate = 1.0f;
+        messageUpdateCountdown = 20;
+    }
+    
+    if (online == 1)
+    {
+        if (countDownToStart != 0)
+        {
+            countDownToStart--;
+        } else {
+            MoveBall(p1, p2, b);
+            CheckForCollisions(p1, p2, b);
+        }
+        MoveComputerPaddle(p1, b);
+        MoveComputerPaddle(p2, b);
+    }
+
+    if (online == 2)
+    {
+        ServData clientData = { 0, p1.Yposition, p2.Yposition , 0, 0};
+        if (messageNeedsUpdate == 1.0f)
+        {
+            clientData.a = 1;
+            messageNeedsUpdate = 0;
+        }
+        ServData sd = t.SendPaddleDataAndUpdate(clientData);
+        
+        if (sd.a == 0)
+        {
+            b.Xposition = sd.b;
+            b.Yposition = sd.c;
+            p1.Yposition = sd.d;
+        } else if (sd.a == 1)
+        {
+            player1Score = sd.b;
+            player2Score = sd.c;
+            messageNum = sd.e;
+        }
     }
 };
 
@@ -656,4 +751,8 @@ Game::Game(float& wH, float& wW)
     rIncrement = 0.005f;
     gIncrement = 0.0f;
     bIncrement = 0.0f;
+    messageNum = 1;
+    messageNeedsUpdate = 0;
+    online = 0;
+    messageUpdateCountdown = 20;
 }

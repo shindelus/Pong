@@ -14,11 +14,12 @@ public:
     int player2Score;
     int level;
     int angleChangeCountdown;
+    int countDownToStart;
+    int online;
     float compDelay;
     float currentCompDelay;
     float windowHeight;
     float windowWidth;
-    float countDownToStart;
     float rIncrement;
     float gIncrement;
     float bIncrement;
@@ -31,6 +32,9 @@ public:
     float blueLo;
     float greenHi;
     float greenLo;
+    float messageNum;
+    float messageNeedsUpdate;
+    int messageUpdateCountdown;
     int curveCountdown;
     std::string message;
     bool compWaiting;
@@ -40,6 +44,7 @@ public:
     bool lost;
     bool p1Scored;
     bool p2Scored;
+    
     
     Game(float& wH, float& wW);
     ~Game(){};
@@ -62,7 +67,8 @@ public:
     void MoveComputerPaddle(Paddle& p, Ball& b);
     void MoveBall(Paddle& p1, Paddle& p2, Ball& b);
     void CheckBallDirection(Ball& b);
-    void AddText(Vertices& v);
+    void AddTextForOffline(Vertices& v);
+    void AddTextForOnline(Vertices& v);
     void CreateBall(float left, float bottom, float width, float height, Vertices& v);
     void UpdateColor();
     void ChangeColor();

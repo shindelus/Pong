@@ -66,19 +66,22 @@ Transfer::Transfer()
 
 }
 
-BallPos Transfer::SendPaddleDataAndUpdate(float pos[])
+ServData Transfer::SendPaddleDataAndUpdate(ServData& cd)
 {
     float buf[BUFLEN];
     
     long recvlen;
+    
+    float data[] = { cd.a, cd.b, cd.c, cd.d, cd.e };
 
-    if (sendto(soc, pos, 4, 0, (struct sockaddr *)&servaddr, slen) < 0) {
+    if (sendto(soc, data, 20, 0, (struct sockaddr *)&servaddr, slen) < 0) {
         perror("sendto failed");
     }
     recvlen = recvfrom(soc, buf, BUFLEN, 0, (struct sockaddr *)&servaddr, &slen);
     if (recvlen >= 0) {
         buf[recvlen] = 0;
-        printf("%f\n", buf[0]);
+//        printf("%f\n", buf[0]);
     }
-    return { buf[0], buf[1] };
+    return { buf[0], buf[1], buf[2], buf[3], buf[4] };
 }
+

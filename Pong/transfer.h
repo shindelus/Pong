@@ -7,10 +7,22 @@
 #include <netdb.h>
 #include <sys/types.h>
 
-struct BallPos
+struct ServData
 {
-    float x, y;
+    // a is action
+    // if a = 1, update score and level
+    // b = score1
+    // c = score2
+    // d = level
+    // e = message
+    // if a = 0, update ball and paddle positions
+    // b = ballX
+    // c = ballY
+    // d = paddle1Y
+    // e = paddle2Y
+    float a, b, c, d, e;
 };
+
 
 class Transfer
 {
@@ -20,5 +32,5 @@ public:
     socklen_t slen;
     Transfer();
     ~Transfer(){};
-    BallPos SendPaddleDataAndUpdate(float pos[]);
+    ServData SendPaddleDataAndUpdate(ServData& cd);
 };
