@@ -16,6 +16,7 @@ public:
     int angleChangeCountdown;
     int countDownToStart;
     int online;
+    int onlineP;
     float compDelay;
     float currentCompDelay;
     float windowHeight;
@@ -36,6 +37,7 @@ public:
     float messageNeedsUpdate;
     int messageUpdateCountdown;
     int curveCountdown;
+    float IP;
     std::string message;
     bool compWaiting;
     bool curve;
@@ -46,6 +48,7 @@ public:
     bool p2Scored;
     bool waitingForOpponent;
     bool playing;
+    bool connected;
     
     
     Game(float& wH, float& wW);

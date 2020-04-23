@@ -88,7 +88,6 @@
 		0EE718612445295D0035D333 /* glfw */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glfw; sourceTree = "<group>"; };
 		0EE71862244529A60035D333 /* libglfw.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.dylib; path = "Pong/glfw/lib-macos/libglfw.3.dylib"; sourceTree = "<group>"; };
 		0EE71866244529BE0035D333 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = Pong/glew/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
-		0EE7186F2445675D0035D333 /* Debug */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Debug; sourceTree = "<group>"; };
 		0EE71871244569BE0035D333 /* basic.shader */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = basic.shader; sourceTree = "<group>"; };
 		0EE71872244613400035D333 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "Pong/glfw/lib-macos/libglfw3.a"; sourceTree = "<group>"; };
 		0EE71874244613590035D333 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = Pong/glew/lib/libGLEW.a; sourceTree = "<group>"; };
@@ -133,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				0EE71871244569BE0035D333 /* basic.shader */,
-				0EE7186F2445675D0035D333 /* Debug */,
 				0EE7186C24455C430035D333 /* data */,
 				0EE718602445295D0035D333 /* glew */,
 				0EE718612445295D0035D333 /* glfw */,

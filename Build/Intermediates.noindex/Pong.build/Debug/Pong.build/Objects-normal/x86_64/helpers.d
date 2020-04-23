@@ -1,2 +1,2 @@
-dependencies: /Users/shindelu/Pong/Pong/helpers.cpp \
-  /Users/shindelu/Pong/Pong/helpers.h
+dependencies: /Users/jeffshindelus/Git/Pong/Pong/helpers.cpp \
+  /Users/jeffshindelus/Git/Pong/Pong/helpers.h

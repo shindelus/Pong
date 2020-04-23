@@ -1,3 +1,4 @@
-dependencies: /Users/shindelu/Pong/Pong/word.cpp \
-  /Users/shindelu/Pong/Pong/word.h /Users/shindelu/Pong/Pong/vertices.h \
-  /Users/shindelu/Pong/Pong/letters.h
+dependencies: /Users/jeffshindelus/Git/Pong/Pong/word.cpp \
+  /Users/jeffshindelus/Git/Pong/Pong/word.h \
+  /Users/jeffshindelus/Git/Pong/Pong/vertices.h \
+  /Users/jeffshindelus/Git/Pong/Pong/letters.h

@@ -55,19 +55,31 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     {
         if (action == GLFW_PRESS)// || action == GLFW_REPEAT)
         {
-            paddle2.isMovingDown = true;
+            if (game.online == 2 && game.onlineP == 1)
+                paddle1.isMovingDown = true;
+            else
+                paddle2.isMovingDown = true;
         } else if (action == GLFW_RELEASE)
         {
-            paddle2.isMovingDown = false;
+            if (game.online == 2 && game.onlineP == 1)
+                paddle1.isMovingDown = false;
+            else
+                paddle2.isMovingDown = false;
         }
     } else if (key == GLFW_KEY_UP)
     {
         if (action == GLFW_PRESS)// || action == GLFW_REPEAT)
         {
-            paddle2.isMovingUp = true;
+            if (game.online == 2 && game.onlineP == 1)
+                paddle1.isMovingUp = true;
+            else
+                paddle2.isMovingUp = true;
         } else if (action == GLFW_RELEASE)
         {
-            paddle2.isMovingUp = false;
+            if (game.online == 2 && game.onlineP == 1)
+                paddle1.isMovingUp = false;
+            else
+                paddle2.isMovingUp = false;
         }
     }
     
@@ -152,7 +164,7 @@ int main(void)
 //    glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
 //    glm::mat4 mvp = proj * view * model;
            
-    Shader shader("basic.shader");
+    Shader shader("/Volumes/Macintosh HD/Applications/Pong.app/basic.shader");
     shader.Bind();
     shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
     shader.SetUniformMat4f("u_MVP", proj);

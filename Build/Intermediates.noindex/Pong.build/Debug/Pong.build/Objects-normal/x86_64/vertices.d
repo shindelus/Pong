@@ -1,2 +1,2 @@
-dependencies: /Users/shindelu/Pong/Pong/vertices.cpp \
-  /Users/shindelu/Pong/Pong/vertices.h
+dependencies: /Users/jeffshindelus/Git/Pong/Pong/vertices.cpp \
+  /Users/jeffshindelus/Git/Pong/Pong/vertices.h

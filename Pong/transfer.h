@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -27,10 +28,11 @@ struct ServData
 class Transfer
 {
 public:
+    std::string hostIP;
     int soc;
     struct sockaddr_in servaddr;
     socklen_t slen;
     Transfer();
     ~Transfer(){};
-    ServData SendPaddleDataAndUpdate(ServData& cd);
+    ServData SendDataAndUpdate(ServData& cd);
 };

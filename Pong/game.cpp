@@ -5,6 +5,8 @@
 #include "vertices.h"
 #include "transfer.h"
 
+#include <sstream>
+
 
 void Game::UpdateColor()
 {
@@ -667,6 +669,14 @@ void Game::CheckPaddleMovement(Paddle& p1, Paddle& p2, Transfer& t)
     {
         MovePaddleDown(p2);
     }
+    
+    if (p1.isMovingUp)
+    {
+        MovePaddleUp(p1);
+    } else if (p1.isMovingDown)
+    {
+        MovePaddleDown(p1);
+    }
 }
 
 void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
@@ -699,32 +709,87 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
 
     if (online == 2) // Online game
     {
-        ServData clientData = { 0, p1.Yposition, p2.Yposition , 0, 0};
-        if (messageNeedsUpdate == 1.0f)
+        if (!connected)
         {
-            clientData.a = 1;
-            messageNeedsUpdate = 0;
-        }
-        ServData sd = t.SendPaddleDataAndUpdate(clientData);
-        
-        printf("Received data --- %f\n", sd.a);
-        if (sd.a == 0)  // Waiting for opponent
-        {
-            waitingForOpponent = true;
-        } else if (sd.a == 1)  // Position update
-        {
-            waitingForOpponent = false;
-            playing = true;
-            b.Xposition = sd.b;
-            b.Yposition = sd.c;
-            p1.Yposition = sd.d;
-        } else if (sd.a == 2)
-        {
-            waitingForOpponent = false;
-            playing = true;
-            player1Score = sd.b;  // Score update
-            player2Score = sd.c;
-            messageNum = sd.e;
+            std::string hIP = t.hostIP;
+            std::string ch = ".";
+            
+            for (char c: ch) {
+                hIP.erase(std::remove(hIP.begin(), hIP.end(), c), hIP.end());
+            }
+            
+            std::cout << hIP << std::endl;
+            
+            std::stringstream str(hIP);
+            str >> IP;
+            
+            ServData clientConnect = { IP, 0, 0, 0, 0};
+            ServData d = t.SendDataAndUpdate(clientConnect);
+            if (d.a == 3.0f)
+            {
+                connected = true;
+                onlineP = 1;
+                printf("Online!!\n");
+                printf("You are player 1\n");
+
+            } else if (d.a == 4.0f)
+            {
+                connected = true;
+                onlineP = 2;
+                printf("Online!!\n");
+                printf("You are player 2\n");
+
+            } else if (d.a == 0)
+                connected = true;
+            
+            // to server -
+            // 0 - IP
+            // 1 - 0 for connect, 1 for state update, 2 for score/message update
+            // 2 - nothing or user paddle position
+            
+            // to client
+            // 0 - 0 unsuccess connect, 1 for score/message update, 2 for state update, 3 for success connect p1, 4 for success connect p2,
+            // 1 - p1 score or ball X
+            // 2 - p2 score or ball Y
+            // 3 - message num or p1 paddle
+            // 4 - p2 paddle
+            
+            
+        } else {
+            
+            ServData clientData = { IP, 1.0f, 0, 0, 0 };
+            if (onlineP == 1)
+                clientData.c = p1.Yposition;
+            else if (onlineP == 2)
+                clientData.c = p2.Yposition;
+            
+            if (messageNeedsUpdate == 1.0f)
+            {
+                clientData.b = 2.0f;
+                messageNeedsUpdate = 0;
+            }
+            ServData sd = t.SendDataAndUpdate(clientData);
+
+            if (sd.a == 0)  // Waiting for opponent
+            {
+                waitingForOpponent = true;
+            }
+            else if (sd.a == 1.0f)  // Position update
+            {
+                waitingForOpponent = false;
+                b.Xposition = sd.b;
+                b.Yposition = sd.c;
+                p1.Yposition = sd.d;
+                p2.Yposition = sd.e;
+                printf("Update state");
+            } else if (sd.a == 2.0f)
+            {
+                waitingForOpponent = false;
+                player1Score = sd.b;
+                player2Score = sd.c;
+                messageNum = sd.d;
+                printf("Update Score");
+            }
         }
     }
 };
@@ -764,4 +829,6 @@ Game::Game(float& wH, float& wW)
     messageUpdateCountdown = 20;
     waitingForOpponent = false;
     playing = false;
+    connected = false;
+    onlineP = 0;
 }
