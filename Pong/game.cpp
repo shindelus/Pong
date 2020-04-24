@@ -684,7 +684,7 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
     ChangeColor();
     CheckPaddleMovement(p1, p2, t);
 
-    if (online == 2 && messageUpdateCountdown != 0 && !playing)
+    if (online == 2 && messageUpdateCountdown != 0)
     {
         messageUpdateCountdown--;
     } else if (online == 2 && messageUpdateCountdown == 0)
@@ -756,6 +756,14 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             
             
         } else {
+            if (playCountdown != 0)
+                playCountdown--;
+            else
+            {
+                playing = true;
+                printf("Now playing\n");
+            }
+
             
             ServData clientData = { IP, 1.0f, 0, 0, 0 };
             if (onlineP == 1)
@@ -781,14 +789,15 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
                 b.Yposition = sd.c;
                 p1.Yposition = sd.d;
                 p2.Yposition = sd.e;
-                printf("Update state");
+                printf("Update state\n");
+                playing = true;
             } else if (sd.a == 2.0f)
             {
                 waitingForOpponent = false;
                 player1Score = sd.b;
                 player2Score = sd.c;
                 messageNum = sd.d;
-                printf("Update Score");
+                printf("Update Score-----------\n");
             }
         }
     }
@@ -831,4 +840,5 @@ Game::Game(float& wH, float& wW)
     playing = false;
     connected = false;
     onlineP = 0;
+    playCountdown = 100;
 }

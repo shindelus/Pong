@@ -37,6 +37,7 @@ public:
     float messageNeedsUpdate;
     int messageUpdateCountdown;
     int curveCountdown;
+    int playCountdown;
     float IP;
     std::string message;
     bool compWaiting;
