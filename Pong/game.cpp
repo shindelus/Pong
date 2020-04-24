@@ -177,10 +177,7 @@ void Game::CheckForRightCollision(Paddle& p, Ball& b)
         {
             clockWiseCurve = !clockWiseCurve;
         }
-
     }
-
-
 };
 
 void Game::CheckForTopCollision(Paddle& p, Ball& b)
@@ -244,7 +241,6 @@ void Game::CheckForBallYBounds(Ball& b)
         b.Yposition = 0.0f;
         b.Yspeed = - b.Yspeed;
         b.direction = 26 - b.direction;
-
     }
 };
 
@@ -771,33 +767,34 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             else if (onlineP == 2)
                 clientData.c = p2.Yposition;
             
+
+            ServData sd1 = t.SendDataAndUpdate(clientData);
+            
+            waitingForOpponent = false;
+            b.Xposition = sd1.b;
+            b.Yposition = sd1.c;
+            if (onlineP == 1)
+                p2.Yposition = sd1.e;
+            else
+                p1.Yposition = sd1.d;
+            printf("Update state\n");
+            playing = true;
+            
             if (messageNeedsUpdate == 1.0f)
             {
                 clientData.b = 2.0f;
                 messageNeedsUpdate = 0;
+                ServData sd2 = t.SendDataAndUpdate(clientData);
+                waitingForOpponent = false;
+                player1Score = sd2.b;
+                player2Score = sd2.c;
+                messageNum = sd2.d;
+                printf("Update Score-----------\n");
             }
-            ServData sd = t.SendDataAndUpdate(clientData);
 
-            if (sd.a == 0)  // Waiting for opponent
+            if (sd1.a == 0)  // Waiting for opponent
             {
                 waitingForOpponent = true;
-            }
-            else if (sd.a == 1.0f)  // Position update
-            {
-                waitingForOpponent = false;
-                b.Xposition = sd.b;
-                b.Yposition = sd.c;
-                p1.Yposition = sd.d;
-                p2.Yposition = sd.e;
-                printf("Update state\n");
-                playing = true;
-            } else if (sd.a == 2.0f)
-            {
-                waitingForOpponent = false;
-                player1Score = sd.b;
-                player2Score = sd.c;
-                messageNum = sd.d;
-                printf("Update Score-----------\n");
             }
         }
     }
