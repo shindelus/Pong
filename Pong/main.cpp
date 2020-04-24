@@ -35,11 +35,21 @@
 #include <netdb.h>
 #include <sys/types.h>
 
+#include <chrono>
+#include <stdio.h>      /* printf */
+#include <time.h>       /* time_t, struct tm, difftime, time, mktime */
 
+#include <sys/timeb.h>
 
 //#define BUFLEN 2048
 //#define MSGS 5
 
+int getMilliCount(){
+    timeb tb;
+    ftime(&tb);
+    int nCount = tb.millitm + (tb.time & 0xfffff) * 1000;
+    return nCount;
+}
 
 float windowHeight = 800.0f;
 float windowWidth = 1300.0f;
@@ -184,9 +194,14 @@ int main(void)
     // Loop until the user closes the window
     int change = 150;
     bool p1Text = true;
-    
+
+
     while (!glfwWindowShouldClose(window))
     {
+
+
+        
+        
         
         renderer.Clear();
 
