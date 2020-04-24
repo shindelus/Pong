@@ -771,25 +771,30 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             ServData sd1 = t.SendDataAndUpdate(clientData);
             
             waitingForOpponent = false;
-            b.Xposition = sd1.b;
-            b.Yposition = sd1.c;
-            if (onlineP == 1)
-                p2.Yposition = sd1.e;
-            else
-                p1.Yposition = sd1.d;
-            printf("Update state\n");
-            playing = true;
-            
-            if (messageNeedsUpdate == 1.0f)
+            if (sd1.a == 1.0f)
+            {
+                b.Xposition = sd1.b;
+                b.Yposition = sd1.c;
+                if (onlineP == 1)
+                    p2.Yposition = sd1.e;
+                else
+                    p1.Yposition = sd1.d;
+                printf("Update state\n");
+                playing = true;
+            }
+            if (messageNeedsUpdate == 2.0f)
             {
                 clientData.b = 2.0f;
                 messageNeedsUpdate = 0;
                 ServData sd2 = t.SendDataAndUpdate(clientData);
-                waitingForOpponent = false;
-                player1Score = sd2.b;
-                player2Score = sd2.c;
-                messageNum = sd2.d;
-                printf("Update Score-----------\n");
+                if (sd2.a == 1.0f)
+                {
+                    player1Score = sd2.b;
+                    player2Score = sd2.c;
+                    messageNum = sd2.d;
+                    waitingForOpponent = false;
+                    printf("Update Score-----------\n");
+                }
             }
 
             if (sd1.a == 0)  // Waiting for opponent
