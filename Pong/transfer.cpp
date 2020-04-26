@@ -16,7 +16,7 @@
 
 
 
-#define BUFLEN 2048
+#define BUFLEN 128
 #define MSGS 5
 
 
@@ -137,13 +137,13 @@ Transfer::Transfer()
 
 }
 
-ServData Transfer::SendDataAndUpdate(ServData& cd)
+ServerData Transfer::SendDataAndUpdate(ClientData& cd)
 {
     float buf[BUFLEN];
     
     long recvlen;
     
-    float data[] = { cd.a, cd.b, cd.c, cd.d, cd.e };
+    float data[] = { cd.a, cd.b };
 
     if (sendto(soc, data, 20, 0, (struct sockaddr *)&servaddr, slen) < 0) {
         perror("sendto failed");
@@ -153,6 +153,6 @@ ServData Transfer::SendDataAndUpdate(ServData& cd)
         buf[recvlen] = 0;
 //        printf("%f\n", buf[0]);
     }
-    return { buf[0], buf[1], buf[2], buf[3], buf[4] };
+    return { buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9] };
 }
 

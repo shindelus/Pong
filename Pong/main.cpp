@@ -198,10 +198,6 @@ int main(void)
 
     while (!glfwWindowShouldClose(window))
     {
-
-
-        
-        
         
         renderer.Clear();
 

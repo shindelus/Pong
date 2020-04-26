@@ -34,8 +34,6 @@ public:
     float greenHi;
     float greenLo;
     float messageNum;
-    float messageNeedsUpdate;
-    int messageUpdateCountdown;
     int curveCountdown;
     int playCountdown;
     float IP;

@@ -679,15 +679,6 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
 {
     ChangeColor();
     CheckPaddleMovement(p1, p2, t);
-
-    if (online == 2 && messageUpdateCountdown != 0)
-    {
-        messageUpdateCountdown--;
-    } else if (online == 2 && messageUpdateCountdown == 0)
-    {
-        messageNeedsUpdate = 1.0f;
-        messageUpdateCountdown = 20;
-    }
     
     if (online == 1) // offline game
     {
@@ -719,24 +710,22 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             std::stringstream str(hIP);
             str >> IP;
             
-            ServData clientConnect = { IP, 0, 0, 0, 0};
-            ServData d = t.SendDataAndUpdate(clientConnect);
-            if (d.a == 3.0f)
+            ClientData clientConnect = { IP, 1000.0f };
+            ServerData d = t.SendDataAndUpdate(clientConnect);
+            if (d.a == 0.0f)
             {
                 connected = true;
                 onlineP = 1;
                 printf("Online!!\n");
                 printf("You are player 1\n");
 
-            } else if (d.a == 4.0f)
+            } else if (d.a == 1.0f)
             {
                 connected = true;
                 onlineP = 2;
                 printf("Online!!\n");
                 printf("You are player 2\n");
-
-            } else if (d.a == 0)
-                connected = true;
+            }
             
             // to server -
             // 0 - IP
@@ -751,53 +740,57 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             // 4 - p2 paddle
             
             
+            
+            // New approach
+            // to server -
+            // 0 - IP
+            // 1 - connect or paddle position
+            
+            // to client
+            // 0 - a - 0 for connect p1, 1 for connect p2, 2 for state update
+            // 1 - b - p1 score
+            // 2 - c - p2 score
+            // 3 - d - opponent paddle
+            // 4 - e - ball X
+            // 5 - f - ball Y
+            // 6 - g - ball speed
+            // 7 - h - ball direction
+            // 8 - i - message
+            // 9 - j - 0 for not plyaing, 1 for game in play
+            
+            
         } else {
-            if (playCountdown != 0)
-                playCountdown--;
-            else
-            {
-                playing = true;
-                printf("Now playing\n");
-            }
-
-            
-            ServData clientData = { IP, 1.0f, 0, 0, 0 };
-            if (onlineP == 1)
-                clientData.c = p1.Yposition;
-            else if (onlineP == 2)
-                clientData.c = p2.Yposition;
+            if (playing)
+                MoveBall(p1, p2, b);
+            ClientData clientData;
+            clientData.a = IP;
+            if (onlineP == 1.0f)
+                clientData.b = p1.Yposition;
+            else if (onlineP == 2.0f)
+                clientData.b = p2.Yposition;
             
 
-            ServData sd1 = t.SendDataAndUpdate(clientData);
+            ServerData sd = t.SendDataAndUpdate(clientData);
             
-            waitingForOpponent = false;
-            if (sd1.a == 1.0f)
+            if (sd.a == 2.0f)
             {
-                b.Xposition = sd1.b;
-                b.Yposition = sd1.c;
+                player1Score = sd.b;
+                player2Score = sd.c;
                 if (onlineP == 1)
-                    p2.Yposition = sd1.e;
+                    p2.Yposition = sd.d;
                 else
-                    p1.Yposition = sd1.d;
-                printf("Update state\n");
-                playing = true;
-            }
-            if (messageNeedsUpdate == 2.0f)
-            {
-                clientData.b = 2.0f;
-                messageNeedsUpdate = 0;
-                ServData sd2 = t.SendDataAndUpdate(clientData);
-                if (sd2.a == 1.0f)
-                {
-                    player1Score = sd2.b;
-                    player2Score = sd2.c;
-                    messageNum = sd2.d;
-                    waitingForOpponent = false;
-                    printf("Update Score-----------\n");
-                }
-            }
-
-            if (sd1.a == 0)  // Waiting for opponent
+                    p1.Yposition = sd.d;
+                b.Xposition = sd.e;
+                b.Yposition = sd.f;
+                b.speed = sd.g;
+                b.direction = sd.h;
+                b.Xspeed = b.speed * b.Xangle[b.direction];
+                b.Yspeed = b.speed * b.Yangle[b.direction];
+                messageNum = sd.i;
+                if (sd.j == 1.0f)
+                    playing = true;
+                waitingForOpponent = false;
+            } else if (sd.a == 0.0f)  // Waiting for opponent
             {
                 waitingForOpponent = true;
             }
@@ -835,9 +828,7 @@ Game::Game(float& wH, float& wW)
     gIncrement = 0.0f;
     bIncrement = 0.0f;
     messageNum = 1;
-    messageNeedsUpdate = 0;
     online = 0;
-    messageUpdateCountdown = 20;
     waitingForOpponent = false;
     playing = false;
     connected = false;

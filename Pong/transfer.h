@@ -8,22 +8,15 @@
 #include <netdb.h>
 #include <sys/types.h>
 
-struct ServData
+struct ClientData
 {
-    // a is action
-    // if a = 1, update score and level
-    // b = score1
-    // c = score2
-    // d = level
-    // e = message
-    // if a = 0, update ball and paddle positions
-    // b = ballX
-    // c = ballY
-    // d = paddle1Y
-    // e = paddle2Y
-    float a, b, c, d, e;
+    float a, b;
 };
 
+struct ServerData
+{
+    float a, b, c, d, e, f, g, h, i, j;
+};
 
 class Transfer
 {
@@ -34,5 +27,5 @@ public:
     socklen_t slen;
     Transfer();
     ~Transfer(){};
-    ServData SendDataAndUpdate(ServData& cd);
+    ServerData SendDataAndUpdate(ClientData& cd);
 };
