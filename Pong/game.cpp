@@ -735,6 +735,7 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             {
                 connected = true;
                 onlineP = 1;
+                paused = true;
                 printf("Online!!\n");
                 printf("You are player 1\n");
 
@@ -742,6 +743,7 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             {
                 connected = true;
                 onlineP = 2;
+                paused = true;
                 printf("Online!!\n");
                 printf("You are player 2\n");
             }
