@@ -222,9 +222,6 @@ int main(void)
                 Word c(" press 2 for 2 player online  ", 200.0f, 380.0f, 40.0f, v);
             }
             change--;
-        } else if (game.waitingForOpponent)
-        {
-            Word b("waiting for opponent", 360.0f, 440.0f, 40.0f, v);
         } else if (game.connected || game.playing)
         {
             game.CreateBall(ball.Xposition, ball.Yposition, ball.width, ball.height, v);

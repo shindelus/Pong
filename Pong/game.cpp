@@ -361,27 +361,31 @@ void Game::AddTextForOnline(Vertices& v)
 {
     if (messageNum == 5)
     {
-        message = "player 1 scores";
+        message = " player 1 scores ";
     }
     if (messageNum == 6)
     {
-        message = "player 2 scores";
+        message = " player 2 scores ";
     }
     if (messageNum == 7)
     {
-        message = " player 1 wins ";
+        message = "  player 1 wins  ";
     }
     if (messageNum == 8)
     {
-        message = " player 2 wins ";
+        message = "  player 2 wins  ";
         countDownToStart = 300.0f;
     }
-    if (messageNum == 9)
-        message = "press 1 to start";
+    if (messageNum == 9){
+        message = " press 1 to start ";
+    }
+    if (messageNum == 10){
+        message = "waiting for opponent";
+    }
     
     if (messageNum > 4)
     {
-        Word d(message, 400.0f, 380.0f, 50.0f, v);
+        Word d(message, 360.0f, 380.0f, 50.0f, v);
     }
     else if (messageNum == 0)
     {
@@ -785,9 +789,11 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             } else if (sd.a == 0.0f)  // Waiting for opponent
             {
                 waitingForOpponent = true;
+                messageNum = 10.0f;
             } else if (sd.a == 3.0f && !paused)  // Paused
             {
                 waitingForOpponent = true;
+                messageNum = 10.0f;
                 if (sd.i == 9.0f)
                     messageNum = sd.i;
             }
