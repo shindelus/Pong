@@ -225,9 +225,6 @@ int main(void)
         } else if (game.waitingForOpponent)
         {
             Word b("waiting for opponent", 360.0f, 440.0f, 40.0f, v);
-        } else if (game.paused)
-        {
-            Word b("  press 1 to play  ", 380.0f, 440.0f, 40.0f, v);
         } else if (game.connected || game.playing)
         {
             game.CreateBall(ball.Xposition, ball.Yposition, ball.width, ball.height, v);

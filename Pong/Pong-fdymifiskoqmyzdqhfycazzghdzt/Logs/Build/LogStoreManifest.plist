@@ -3202,6 +3202,40 @@
 			<key>uniqueIdentifier</key>
 			<string>1DF81C37-4928-49FA-A3F4-DCA2D7D873B4</string>
 		</dict>
+		<key>1E98665E-8205-4450-8C14-2B7CC4D64A4A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1E98665E-8205-4450-8C14-2B7CC4D64A4A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609636017.42039895</real>
+			<key>timeStoppedRecording</key>
+			<real>609636017.45275104</real>
+			<key>title</key>
+			<string>Build Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>1E98665E-8205-4450-8C14-2B7CC4D64A4A</string>
+		</dict>
 		<key>1F20D765-B268-4996-BAAB-E71606D64FDA</key>
 		<dict>
 			<key>className</key>
@@ -5650,6 +5684,40 @@
 			<key>uniqueIdentifier</key>
 			<string>3D196C91-9EAD-490A-8C26-2980D78942A9</string>
 		</dict>
+		<key>3DCA71B7-560B-4ED4-AC82-118EFCA4DA15</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3DCA71B7-560B-4ED4-AC82-118EFCA4DA15.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609634885.59096396</real>
+			<key>timeStoppedRecording</key>
+			<real>609634885.63846505</real>
+			<key>title</key>
+			<string>Build Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>3DCA71B7-560B-4ED4-AC82-118EFCA4DA15</string>
+		</dict>
 		<key>3DCD2338-BDC2-4688-AE96-DB3C915BC53C</key>
 		<dict>
 			<key>className</key>
@@ -6737,6 +6805,40 @@
 			<string>Build Pong</string>
 			<key>uniqueIdentifier</key>
 			<string>4BB645BC-7DAD-4518-A72A-C6C5CC6CC36C</string>
+		</dict>
+		<key>4BFDB0FB-64A9-421C-8BB7-02281252A73C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4BFDB0FB-64A9-421C-8BB7-02281252A73C.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609635165.09909594</real>
+			<key>timeStoppedRecording</key>
+			<real>609635165.13172901</real>
+			<key>title</key>
+			<string>Build Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>4BFDB0FB-64A9-421C-8BB7-02281252A73C</string>
 		</dict>
 		<key>4C24B7D3-78E3-468D-BE3C-D532A69C7A82</key>
 		<dict>
@@ -8335,6 +8437,40 @@
 			<string>Build Pong</string>
 			<key>uniqueIdentifier</key>
 			<string>5A3312D6-C1B2-43DE-A9AB-BAAB5867BB5C</string>
+		</dict>
+		<key>5B848618-455E-4511-BCB9-8DEFBF906CD1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5B848618-455E-4511-BCB9-8DEFBF906CD1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609636003.54855299</real>
+			<key>timeStoppedRecording</key>
+			<real>609636004.77829301</real>
+			<key>title</key>
+			<string>Build Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>5B848618-455E-4511-BCB9-8DEFBF906CD1</string>
 		</dict>
 		<key>5C1A2FBB-6150-4533-AF70-A0AF0F577362</key>
 		<dict>
@@ -16427,6 +16563,40 @@
 			<string>Build Pong</string>
 			<key>uniqueIdentifier</key>
 			<string>ACD82EEF-94A0-4100-A241-29BAB6F946D9</string>
+		</dict>
+		<key>AD3CBB72-BA87-4DB3-90CD-3FB2CA9891A5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>AD3CBB72-BA87-4DB3-90CD-3FB2CA9891A5.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609636044.16205704</real>
+			<key>timeStoppedRecording</key>
+			<real>609636044.19373703</real>
+			<key>title</key>
+			<string>Build Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>AD3CBB72-BA87-4DB3-90CD-3FB2CA9891A5</string>
 		</dict>
 		<key>ADC77034-6DBF-4C0E-817F-CC3CEF588297</key>
 		<dict>
