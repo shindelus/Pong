@@ -153,6 +153,6 @@ ServerData Transfer::SendDataAndUpdate(ClientData& cd)
         buf[recvlen] = 0;
 //        printf("%f\n", buf[0]);
     }
-    return { buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9] };
+    return { buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10] };
 }
 

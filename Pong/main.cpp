@@ -97,6 +97,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         game.online = 1;
     if (key == GLFW_KEY_2 && game.online == 0)
         game.online = 2;
+    if (key == GLFW_KEY_1 && game.paused)
+        game.paused = false;
 }
 
 int main(void)
@@ -223,7 +225,10 @@ int main(void)
         } else if (game.waitingForOpponent)
         {
             Word b("waiting for opponent", 360.0f, 440.0f, 40.0f, v);
-        } else if (game.playing)
+        } else if (game.paused)
+        {
+            Word b("  press 1 to play  ", 380.0f, 440.0f, 40.0f, v);
+        } else if (game.connected || game.playing)
         {
             game.CreateBall(ball.Xposition, ball.Yposition, ball.width, ball.height, v);
             v.AddVertData(paddle1.Xposition, paddle1.Yposition, paddle1.width, paddle1.height);

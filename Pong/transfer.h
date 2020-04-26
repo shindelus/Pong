@@ -15,7 +15,7 @@ struct ClientData
 
 struct ServerData
 {
-    float a, b, c, d, e, f, g, h, i, j;
+    float a, b, c, d, e, f, g, h, i, j, k;
 };
 
 class Transfer

@@ -644,6 +644,7 @@ void Game::ResetLevel(Paddle& p1, Paddle& p2, Ball& b)
     curve = false;
     clockWiseCurve = false;
     UpdateColor();
+    paused = true;
 };
 
 void Game::ResetGame(Paddle& p1, Paddle& p2, Ball& b)
@@ -696,6 +697,24 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
 
     if (online == 2) // Online game
     {
+        
+        // to server -
+        // 0 - IP
+        // 1 - connect or paddle position or paused
+        
+        // to client
+        // 0 - a - 0 for connect p1, 1 for connect p2, 2 for state update, 3 for paused
+        // 1 - b - p1 score
+        // 2 - c - p2 score
+        // 3 - d - opponent paddle
+        // 4 - e - ball X
+        // 5 - f - ball Y
+        // 6 - g - ball speed
+        // 7 - h - ball direction
+        // 8 - i - message
+        // 9 - j - 0 for not playing, 1 for game in play
+        
+        
         if (!connected)
         {
             std::string hIP = t.hostIP;
@@ -726,38 +745,10 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
                 printf("Online!!\n");
                 printf("You are player 2\n");
             }
-            
-            // to server -
-            // 0 - IP
-            // 1 - 0 for connect, 1 for state update, 2 for score/message update
-            // 2 - nothing or user paddle position
-            
-            // to client
-            // 0 - 0 unsuccess connect, 1 for score/message update, 2 for state update, 3 for success connect p1, 4 for success connect p2,
-            // 1 - p1 score or ball X
-            // 2 - p2 score or ball Y
-            // 3 - message num or p1 paddle
-            // 4 - p2 paddle
-            
-            
-            
-            // New approach
-            // to server -
-            // 0 - IP
-            // 1 - connect or paddle position
-            
-            // to client
-            // 0 - a - 0 for connect p1, 1 for connect p2, 2 for state update
-            // 1 - b - p1 score
-            // 2 - c - p2 score
-            // 3 - d - opponent paddle
-            // 4 - e - ball X
-            // 5 - f - ball Y
-            // 6 - g - ball speed
-            // 7 - h - ball direction
-            // 8 - i - message
-            // 9 - j - 0 for not plyaing, 1 for game in play
-            
+        } else if (paused)
+        {
+            ClientData clientPause = { IP, 2000.0f };
+            ServerData s = t.SendDataAndUpdate(clientPause);
             
         } else {
             if (playing)
@@ -791,6 +782,9 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
                     playing = true;
                 waitingForOpponent = false;
             } else if (sd.a == 0.0f)  // Waiting for opponent
+            {
+                waitingForOpponent = true;
+            } else if (sd.a == 3.0f && !paused)  // Paused
             {
                 waitingForOpponent = true;
             }
@@ -834,4 +828,5 @@ Game::Game(float& wH, float& wW)
     connected = false;
     onlineP = 0;
     playCountdown = 100;
+    paused = false;
 }
