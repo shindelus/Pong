@@ -369,11 +369,11 @@ void Game::AddTextForOnline(Vertices& v)
     }
     if (messageNum == 7.0f)
     {
-        message = "  player 1 wins  ";
+        message = "  player 2 wins  ";
     }
     if (messageNum == 8.0f)
     {
-        message = "  player 2 wins  ";
+        message = "  player 1 wins  ";
         countDownToStart = 300.0f;
     }
     if (messageNum == 9.0f){
@@ -416,7 +416,10 @@ void Game::AddTextForOnline(Vertices& v)
     
     std::stringstream p2ScoreStr;
     p2ScoreStr << player2Score;
-    Word scoreP2(p2ScoreStr.str(), windowWidth - 50.0f, windowHeight - 45.0f, 35.0f, v);
+    if (player2Score > 9)
+        Word scoreP2(p2ScoreStr.str(), windowWidth - 70.0f, windowHeight - 45.0f, 35.0f, v);
+    else
+        Word scoreP2(p2ScoreStr.str(), windowWidth - 50.0f, windowHeight - 45.0f, 35.0f, v);
 
     Vertex vertices[v.m_vertData.size()];
     std::copy(v.m_vertData.begin(), v.m_vertData.end(), vertices);
@@ -753,6 +756,7 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
         {
             ClientData clientUnpause = { IP, 2000.0f };
             ServerData d = t.SendDataAndUpdate(clientUnpause);
+            hitOne = false;
         } else {
             if (playing)
                 MoveBall(p1, p2, b);
