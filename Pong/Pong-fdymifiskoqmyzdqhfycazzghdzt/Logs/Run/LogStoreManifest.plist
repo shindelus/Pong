@@ -108,6 +108,40 @@
 			<key>uniqueIdentifier</key>
 			<string>02FD4B2D-221C-4304-92F3-90C08DD90255</string>
 		</dict>
+		<key>03B18B50-996C-449F-8C37-A3B7CB6B6D09</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>03B18B50-996C-449F-8C37-A3B7CB6B6D09.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609700963.38105905</real>
+			<key>timeStoppedRecording</key>
+			<real>609701011.46649802</real>
+			<key>title</key>
+			<string>Run Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>03B18B50-996C-449F-8C37-A3B7CB6B6D09</string>
+		</dict>
 		<key>03D719B0-796A-4E06-A524-27DA408EBD03</key>
 		<dict>
 			<key>className</key>
@@ -8200,6 +8234,40 @@
 			<key>uniqueIdentifier</key>
 			<string>6AA92D64-4E1F-49BE-8B72-D0D3FEAEB4AB</string>
 		</dict>
+		<key>6B12CFB7-D2BB-45E5-A644-2F9F9B845F75</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>6B12CFB7-D2BB-45E5-A644-2F9F9B845F75.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609700295.35915804</real>
+			<key>timeStoppedRecording</key>
+			<real>609700638.33312595</real>
+			<key>title</key>
+			<string>Run Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>6B12CFB7-D2BB-45E5-A644-2F9F9B845F75</string>
+		</dict>
 		<key>6B486CD0-9E5C-43DE-AFD3-4FC1C3F745BB</key>
 		<dict>
 			<key>className</key>
@@ -8335,6 +8403,40 @@
 			<string>Run Pong</string>
 			<key>uniqueIdentifier</key>
 			<string>6C2C20CC-FEB8-4D16-B68A-87834AB9D877</string>
+		</dict>
+		<key>6CAA7BE5-4C62-4F50-BCB9-6B58EF24BBFD</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>6CAA7BE5-4C62-4F50-BCB9-6B58EF24BBFD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609701020.37577403</real>
+			<key>timeStoppedRecording</key>
+			<real>609701080.14191198</real>
+			<key>title</key>
+			<string>Run Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>6CAA7BE5-4C62-4F50-BCB9-6B58EF24BBFD</string>
 		</dict>
 		<key>6CBFA556-CCEB-405E-8591-DF970551A8A2</key>
 		<dict>
@@ -13300,6 +13402,40 @@
 			<key>uniqueIdentifier</key>
 			<string>A82772C0-0B02-469B-9698-15EBE4D6BD0D</string>
 		</dict>
+		<key>A8BDB597-6B5D-47E6-8E1A-A04662672CCC</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>A8BDB597-6B5D-47E6-8E1A-A04662672CCC.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609700765.01751006</real>
+			<key>timeStoppedRecording</key>
+			<real>609700789.04688704</real>
+			<key>title</key>
+			<string>Run Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>A8BDB597-6B5D-47E6-8E1A-A04662672CCC</string>
+		</dict>
 		<key>A9883876-66C9-4E37-A115-C96D3847D509</key>
 		<dict>
 			<key>className</key>
@@ -14727,6 +14863,40 @@
 			<string>Run Pong</string>
 			<key>uniqueIdentifier</key>
 			<string>BFA1AFBC-67AF-4E51-B2AF-81E4C41DB0F7</string>
+		</dict>
+		<key>C02252E1-3B9F-4782-BB39-FDBC7763BDCD</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>C02252E1-3B9F-4782-BB39-FDBC7763BDCD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609700937.05876601</real>
+			<key>timeStoppedRecording</key>
+			<real>609700954.27068198</real>
+			<key>title</key>
+			<string>Run Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>C02252E1-3B9F-4782-BB39-FDBC7763BDCD</string>
 		</dict>
 		<key>C0BD7246-F7E9-4384-811A-1C4592ABD7F1</key>
 		<dict>
@@ -18467,6 +18637,40 @@
 			<string>Run Pong</string>
 			<key>uniqueIdentifier</key>
 			<string>F5ADF131-92C5-48E7-B6EE-93029DBC6479</string>
+		</dict>
+		<key>F5CF6A7A-51CC-4554-ADB2-983B283EB26E</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>F5CF6A7A-51CC-4554-ADB2-983B283EB26E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Pong project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Pong</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run Pong</string>
+			<key>timeStartedRecording</key>
+			<real>609700806.53669596</real>
+			<key>timeStoppedRecording</key>
+			<real>609700842.94826102</real>
+			<key>title</key>
+			<string>Run Pong</string>
+			<key>uniqueIdentifier</key>
+			<string>F5CF6A7A-51CC-4554-ADB2-983B283EB26E</string>
 		</dict>
 		<key>F5DE8F7A-74FC-43A8-8E13-B4BA11B7C77A</key>
 		<dict>
