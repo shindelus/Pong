@@ -49,6 +49,7 @@ public:
     bool playing;
     bool connected;
     bool paused;
+    bool hitOne;
     
     
     Game(float& wH, float& wW);

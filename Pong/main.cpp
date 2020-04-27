@@ -98,7 +98,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_2 && game.online == 0)
         game.online = 2;
     if (key == GLFW_KEY_1 && game.paused)
-        game.paused = false;
+        game.hitOne = true;
 }
 
 int main(void)

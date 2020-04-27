@@ -359,27 +359,27 @@ void Game::MovePaddleDown(Paddle& p)
 
 void Game::AddTextForOnline(Vertices& v)
 {
-    if (messageNum == 5)
+    if (messageNum == 5.0f)
     {
         message = " player 1 scores ";
     }
-    if (messageNum == 6)
+    if (messageNum == 6.0f)
     {
         message = " player 2 scores ";
     }
-    if (messageNum == 7)
+    if (messageNum == 7.0f)
     {
         message = "  player 1 wins  ";
     }
-    if (messageNum == 8)
+    if (messageNum == 8.0f)
     {
         message = "  player 2 wins  ";
         countDownToStart = 300.0f;
     }
-    if (messageNum == 9){
+    if (messageNum == 9.0f){
         message = " press 1 to start ";
     }
-    if (messageNum == 10){
+    if (messageNum == 10.0f){
         message = "waiting for opponent";
     }
     
@@ -716,6 +716,7 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
         // 7 - h - ball direction
         // 8 - i - message
         // 9 - j - 0 for not playing, 1 for game in play
+        // 10 - k - 0 for not paused, 1 for paused
         
         
         if (!connected)
@@ -738,7 +739,6 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             {
                 connected = true;
                 onlineP = 1;
-                paused = true;
                 printf("Online!!\n");
                 printf("You are player 1\n");
 
@@ -746,15 +746,13 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             {
                 connected = true;
                 onlineP = 2;
-                paused = true;
                 printf("Online!!\n");
                 printf("You are player 2\n");
             }
-        } else if (paused)
+        } else if (hitOne)
         {
-            ClientData clientPause = { IP, 2000.0f };
-            ServerData s = t.SendDataAndUpdate(clientPause);
-            
+            ClientData clientUnpause = { IP, 2000.0f };
+            ServerData d = t.SendDataAndUpdate(clientUnpause);
         } else {
             if (playing)
                 MoveBall(p1, p2, b);
@@ -770,6 +768,7 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
             
             if (sd.a == 2.0f)
             {
+                paused = false;
                 player1Score = sd.b;
                 player2Score = sd.c;
                 if (onlineP == 1)
@@ -785,17 +784,24 @@ void Game::OnUpdate(Paddle& p1, Paddle& p2, Ball& b, Transfer& t)
                 messageNum = sd.i;
                 if (sd.j == 1.0f)
                     playing = true;
-                waitingForOpponent = false;
+                else if (sd.j == 0.0f)
+                    playing = false;
+                if (sd.k == 1.0f)
+                {
+                    paused = true;
+                    messageNum = 9.0f;
+                }
             } else if (sd.a == 0.0f)  // Waiting for opponent
             {
+                paused = false;
                 waitingForOpponent = true;
                 messageNum = 10.0f;
-            } else if (sd.a == 3.0f && !paused)  // Paused
+                playing = false;
+            } else if (sd.a == 3.0f)
             {
-                waitingForOpponent = true;
-                messageNum = 10.0f;
-                if (sd.i == 9.0f)
-                    messageNum = sd.i;
+                messageNum = 9.0f;
+                paused = true;
+                playing = false;
             }
         }
     }
@@ -838,4 +844,5 @@ Game::Game(float& wH, float& wW)
     onlineP = 0;
     playCountdown = 100;
     paused = false;
+    hitOne = false;
 }
